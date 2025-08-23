@@ -1,0 +1,25 @@
+package in.co.rays.proj4.test;
+
+import java.sql.Timestamp;
+import java.util.Date;
+
+import in.co.rays.proj4.bean.RoleBean;
+
+public class TestRoleModel {
+
+	public static void main(String[] args) throws Exception {
+		testAdd();
+	}
+
+	public static void testAdd() throws Exception {
+		RoleBean bean = new RoleBean();
+		bean.setName("Developer");
+		bean.setDescription("Description");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
+		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
+		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
+
+	}
+
+}

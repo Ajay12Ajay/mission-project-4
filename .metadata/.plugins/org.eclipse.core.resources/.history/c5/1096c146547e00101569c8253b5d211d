@@ -1,0 +1,127 @@
+package in.co.rays.proj4.test;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import in.co.rays.proj4.bean.CourseBean;
+import in.co.rays.proj4.model.CourseModel;
+
+public class TestCourseModel {
+
+	public static void main(String[] args) throws Exception {
+		// testAdd();
+		// testUpdate();
+		// testDelete();
+		// findByPk();
+		// findByName();
+		// search();
+
+	}
+
+	public static void testAdd() throws Exception {
+		CourseBean bean = new CourseBean();
+		bean.setName("Developer");
+		bean.setDuration("");
+		bean.setDescription("Description");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
+		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
+		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
+
+		CourseModel model = new CourseModel();
+		model.add(bean);
+	}
+
+	public static void testUpdate() throws Exception {
+		CourseBean bean = new CourseBean();
+		bean.setId(1);
+		bean.setName("Tester");
+		bean.setDuration("3 months");
+		bean.setDescription("Tester");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
+		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
+		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
+
+		CourseModel model = new CourseModel();
+		model.update(bean);
+
+	}
+
+	public static void testDelete() throws Exception {
+
+		CourseModel model = new CourseModel();
+		model.delete(2);
+	}
+
+	public static void findByPk() throws Exception {
+
+		CourseModel model = new CourseModel();
+		CourseBean bean = model.findByPk(2);
+		if (bean != null) {
+			System.out.println("\t" + bean.getId());
+			System.out.println("\t" + bean.getName());
+			System.out.println("\t" + bean.getDuration());
+			System.out.println("\t" + bean.getDescription());
+			System.out.println("\t" + bean.getCreatedBy());
+			System.out.println("\t" + bean.getModifiedBy());
+			System.out.println("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+		} else {
+			System.out.println("id does not exist....!");
+
+		}
+	}
+
+	public static void findByName() throws Exception {
+
+		CourseModel model = new CourseModel();
+		CourseBean bean = model.findByName("Engineer");
+		if (bean != null) {
+			System.out.println("\t" + bean.getId());
+			System.out.println("\t" + bean.getName());
+			System.out.println("\t" + bean.getDuration());
+			System.out.println("\t" + bean.getDescription());
+			System.out.println("\t" + bean.getCreatedBy());
+			System.out.println("\t" + bean.getModifiedBy());
+			System.out.println("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+		} else {
+			System.out.println("Name does not exist....!");
+
+		}
+	}
+
+	public static void search() throws Exception {
+
+		CourseBean bean = new CourseBean();
+		bean.setId(1);
+		// bean.setName("Tester");
+		// bean.setDescription("Tester");
+		// bean.setCreatedBy("Admin");
+		// bean.setModifiedBy("Admin");
+		// bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
+		// bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
+
+		CourseModel model = new CourseModel();
+		List list = model.search(bean, 1, 5);
+		Iterator<CourseBean> it = list.iterator();
+
+		while (it.hasNext()) {
+			bean = it.next();
+			System.out.println("\t" + bean.getId());
+			System.out.println("\t" + bean.getName());
+			System.out.println("\t" + bean.getDuration());
+			System.out.println("\t" + bean.getDescription());
+			System.out.println("\t" + bean.getCreatedBy());
+			System.out.println("\t" + bean.getModifiedBy());
+			System.out.println("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+
+		}
+
+	}
+
+}

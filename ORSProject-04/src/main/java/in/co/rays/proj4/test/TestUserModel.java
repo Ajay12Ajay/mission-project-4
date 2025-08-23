@@ -1,0 +1,198 @@
+package in.co.rays.proj4.test;
+
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import in.co.rays.proj4.bean.UserBean;
+import in.co.rays.proj4.exception.ApplicationException;
+import in.co.rays.proj4.exception.DuplicateRecordException;
+import in.co.rays.proj4.model.UserModel;
+
+public class TestUserModel {
+	public static void main(String[] args) throws ApplicationException, ParseException, DuplicateRecordException {
+
+		// testAdd();
+		// testUpdate();
+		// testDelete();
+		// findByPk();
+		// findByLogin();
+		//search();
+		// testList();
+
+	}
+
+	public static void testAdd() throws ApplicationException, ParseException, DuplicateRecordException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		UserBean bean = new UserBean();
+
+		bean.setFirstName("Aniket");
+		bean.setLastName("Rajput");
+		bean.setLogin("aniket@gmail.com");
+		bean.setPassword("123");
+		bean.setDob(sdf.parse("23-12-1998"));
+		bean.setMobileNo("9812345699");
+		bean.setRoleId(1);
+		bean.setGender("Male");
+
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
+		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
+		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
+
+		UserModel model = new UserModel();
+		model.add(bean);
+	}
+
+	public static void testUpdate() throws ApplicationException, ParseException, DuplicateRecordException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		UserBean bean = new UserBean();
+		bean.setId(1);
+		bean.setFirstName("Vijay");
+		bean.setLastName("Pratap");
+		bean.setLogin("vijay@gmail.com");
+		bean.setPassword("123");
+		bean.setDob(sdf.parse("24-12-1995"));
+		bean.setMobileNo("9812345658");
+		bean.setRoleId(1);
+		bean.setGender("Male");
+
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
+		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
+		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
+
+		UserModel model = new UserModel();
+		model.update(bean);
+
+	}
+
+	public static void testDelete() throws ApplicationException {
+
+		UserModel model = new UserModel();
+		model.delete(1);
+	}
+
+	public static void findByPk() throws ApplicationException {
+
+		UserModel model = new UserModel();
+		UserBean bean = model.findByPk(2);
+		if (bean != null) {
+			System.out.println("\t" + bean.getId());
+			System.out.println("\t" + bean.getFirstName());
+			System.out.println("\t" + bean.getLastName());
+			System.out.println("\t" + bean.getLogin());
+			System.out.println("\t" + bean.getPassword());
+			System.out.println("\t" + bean.getDob());
+			System.out.println("\t" + bean.getMobileNo());
+			System.out.println("\t" + bean.getRoleId());
+			System.out.println("\t" + bean.getGender());
+
+			System.out.println("\t" + bean.getCreatedBy());
+			System.out.println("\t" + bean.getModifiedBy());
+			System.out.println("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+		} else {
+			System.out.println("id does not exist....!");
+
+		}
+	}
+
+	public static void findByLogin() throws ApplicationException {
+
+		UserModel model = new UserModel();
+		UserBean bean = model.findByLogin("aniket@gmail.com");
+		if (bean != null) {
+			System.out.println("\t" + bean.getId());
+			System.out.println("\t" + bean.getFirstName());
+			System.out.println("\t" + bean.getLastName());
+			System.out.println("\t" + bean.getLogin());
+			System.out.println("\t" + bean.getPassword());
+			System.out.println("\t" + bean.getDob());
+			System.out.println("\t" + bean.getMobileNo());
+			System.out.println("\t" + bean.getRoleId());
+			System.out.println("\t" + bean.getGender());
+
+			System.out.println("\t" + bean.getCreatedBy());
+			System.out.println("\t" + bean.getModifiedBy());
+			System.out.println("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+		} else {
+			System.out.println("LoginId does not exist....!");
+
+		}
+	}
+
+	public static void search() throws ApplicationException, ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+		UserBean bean = new UserBean();
+		// bean.setId(1);
+		// bean.setFirstName("Ajay");
+		// bean.setLastName("Pratap");
+		// bean.setLogin("vijay@gmail.com");
+		// bean.setPassword("123");
+		bean.setDob(sdf.parse("23-12-1999"));
+		// bean.setMobileNo("9812345658");
+		// bean.setRoleId(101);
+		// bean.setGender("Male");
+
+		UserModel model = new UserModel();
+		List list = model.search(bean, 1, 5);
+		Iterator<UserBean> it = list.iterator();
+
+		while (it.hasNext()) {
+			bean = it.next();
+			System.out.println("\t" + bean.getId());
+			System.out.println("\t" + bean.getFirstName());
+			System.out.println("\t" + bean.getLastName());
+			System.out.println("\t" + bean.getLogin());
+			System.out.println("\t" + bean.getPassword());
+			System.out.println("\t" + bean.getDob());
+			System.out.println("\t" + bean.getMobileNo());
+			System.out.println("\t" + bean.getRoleId());
+			System.out.println("\t" + bean.getGender());
+
+			System.out.println("\t" + bean.getCreatedBy());
+			System.out.println("\t" + bean.getModifiedBy());
+			System.out.println("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+
+		}
+
+	}
+
+	public static void testList() throws ApplicationException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+		UserBean bean = new UserBean();
+
+		UserModel model = new UserModel();
+		List list = model.list();
+		Iterator<UserBean> it = list.iterator();
+
+		while (it.hasNext()) {
+			bean = it.next();
+			System.out.println("\t" + bean.getId());
+			System.out.println("\t" + bean.getFirstName());
+			System.out.println("\t" + bean.getLastName());
+			System.out.println("\t" + bean.getLogin());
+			System.out.println("\t" + bean.getPassword());
+			System.out.println("\t" + bean.getDob());
+			System.out.println("\t" + bean.getMobileNo());
+			System.out.println("\t" + bean.getRoleId());
+			System.out.println("\t" + bean.getGender());
+
+			System.out.println("\t" + bean.getCreatedBy());
+			System.out.println("\t" + bean.getModifiedBy());
+			System.out.println("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+
+		}
+
+	}
+
+}

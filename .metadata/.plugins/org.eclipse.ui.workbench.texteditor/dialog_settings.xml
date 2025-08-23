@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="FacultyModel"/>
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="StudentModel"/>
+			<item value="StudentBean"/>
+			<item value="RoleBean"/>
+			<item value="st_role"/>
+			<item value="RoleModel"/>
+			<item value="CollegeModel"/>
+			<item value="CollegeBean"/>
+			<item value="st_college"/>
+			<item value="UserModel"/>
+			<item value="UserBean"/>
+			<item value="st_user"/>
+			<item value="RoleUser"/>
+			<item value="role"/>
+			<item value="quicks"/>
+		</list>
+		<list key="replacehistory">
+			<item value="FacultyModel"/>
+			<item value="FacultyBean"/>
+			<item value="st_faculty"/>
+			<item value="TimetableModel"/>
+			<item value="TimetableBean"/>
+			<item value="st_timetable"/>
+			<item value="SubjectModel"/>
+			<item value="SubjectBean"/>
+			<item value="st_subject"/>
+			<item value="CourseModel"/>
+			<item value="CourseBean"/>
+			<item value="st_course"/>
+			<item value="MarksheetModel"/>
+			<item value="MarksheetBean"/>
+			<item value="st_marksheet"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="674"/>
+		<item key="DIALOG_Y_ORIGIN" value="219"/>
+		<item key="DIALOG_WIDTH" value="284"/>
+		<item key="DIALOG_HEIGHT" value="391"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+</section>

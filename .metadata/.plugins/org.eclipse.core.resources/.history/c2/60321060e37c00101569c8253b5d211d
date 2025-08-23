@@ -1,0 +1,12 @@
+package in.co.rays.proj4.bean;
+
+public class MarksheetBean {
+
+	private String rollNo;
+	private long studentId;
+	private String name;
+	private Integer physics;
+	private Integer chemistry;
+	private Integer maths;
+
+}

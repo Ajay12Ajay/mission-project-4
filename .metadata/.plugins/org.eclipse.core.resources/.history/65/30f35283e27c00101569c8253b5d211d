@@ -1,0 +1,20 @@
+package in.co.rays.proj4.bean;
+
+import java.util.Date;
+
+public class FacultyBean {
+
+	private String firstName;
+	private String lastName;
+	private Date dob;
+	private String gender;
+	private String mobileNo;
+	private String email;
+	private Long collegeId;
+	private String collegeName;
+	private Long courseId;
+	private String courseName;
+	private Long subjectId;
+	private String subjectName;
+
+}

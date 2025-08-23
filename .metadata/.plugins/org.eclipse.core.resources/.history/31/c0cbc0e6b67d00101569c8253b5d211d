@@ -1,0 +1,14 @@
+package in.co.rays.proj4.test;
+
+public class TestCollegeModel {
+
+	public static void main(String[] args) {
+		// testAdd();
+		// testUpdate();
+		// testDelete();
+		// findByPk();
+		// findByName();
+		// search();
+	}
+
+}
