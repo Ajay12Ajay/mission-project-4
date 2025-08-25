@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="H:\mission-project-04"/>
 			<item value="H:\mission-project-04\ORSProject-04"/>
 		</list>
 		<list key="projectNameTemplate">
