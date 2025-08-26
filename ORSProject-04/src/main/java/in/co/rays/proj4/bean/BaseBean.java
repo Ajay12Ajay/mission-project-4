@@ -2,13 +2,13 @@ package in.co.rays.proj4.bean;
 
 import java.sql.Timestamp;
 
-public class BaseBean {
+public abstract class BaseBean implements DropdownListBean{
 
-	private Long id;
-	private String createdBy;
-	private String modifiedBy;
-	private Timestamp createdDatetime;
-	private Timestamp modifiedDatetime;
+	protected Long id;
+	protected String createdBy;
+	protected String modifiedBy;
+	protected Timestamp createdDatetime;
+	protected Timestamp modifiedDatetime;
 
 	public Long getId() {
 		return id;
