@@ -25,9 +25,9 @@ public class ServletUtility {
 		response.sendRedirect(page);
 	}
 
-	public static String getErrorMessage(String property, HttpServletRequest request) {
+	public static String getErrorMessage(String key, HttpServletRequest request) {
 
-		String val = (String) request.getAttribute(property);
+		String val = (String) request.getAttribute(key);
 		if (val == null) {
 			return "";
 		} else {
@@ -49,7 +49,7 @@ public class ServletUtility {
 	}
 
 	public static String getErrorMessage(HttpServletRequest request) {
-		String val = (String) request.getAttribute(BaseCtl.MSG_ERROR); //error
+		String val = (String) request.getAttribute(BaseCtl.MSG_ERROR); // error
 		if (val == null) {
 			return "";
 		} else {
