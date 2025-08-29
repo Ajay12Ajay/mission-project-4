@@ -14,6 +14,11 @@ public class DataUtility {
 
 	private static final SimpleDateFormat timeFormatter = new SimpleDateFormat(APP_TIME_FORMAT);
 
+	// Extra
+	public static final String SQL_DATE_FORMAT = "yyyy-MM-dd";
+	private static final SimpleDateFormat appFormatter = new SimpleDateFormat(APP_DATE_FORMAT);
+	private static final SimpleDateFormat sqlFormatter = new SimpleDateFormat(SQL_DATE_FORMAT);
+
 	public static String getString(String val) {
 		if (DataValidator.isNotNull(val)) {
 			return val.trim();
@@ -47,22 +52,57 @@ public class DataUtility {
 	}
 
 	public static Date getDate(String val) {
-		Date date = null;
+	/*	Date date = null;
 		try {
 			date = formatter.parse(val);
 		} catch (Exception e) {
+			try {
+				date = sqlFormatter.parse(val);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 
-		}
+		} */
+		
+		if (val == null || val.trim().equals("")) {
+	        return null;
+	    }
+	    Date date = null;
+	    try {
+	        // First try HTML/SQL format (yyyy-MM-dd)
+	        date = sqlFormatter.parse(val);
+	    } catch (Exception e1) {
+	        try {
+	            // If user typed manually (dd-MM-yyyy)
+	            date = appFormatter.parse(val);
+	        } catch (Exception e2) {
+	            // ignore
+	        }
+	    }
 		return date;
 	}
 
 	public static String getDateString(Date date) {
-		try {
+		/*try {
 			return formatter.format(date);
 		} catch (Exception e) {
-		}
+		}*/
+		
+		if (date != null) {
+	        return appFormatter.format(date);
+	    }
+		
 		return "";
 	}
+	
+	// Convert Date to SQL string (yyyy-MM-dd for DB)
+	public static String getSQLDateString(Date date) {
+	    if (date != null) {
+	        return sqlFormatter.format(date);
+	    }
+	    return "";
+	}
+
 
 	public static Date getDate(Date date, int day) {
 		return null;

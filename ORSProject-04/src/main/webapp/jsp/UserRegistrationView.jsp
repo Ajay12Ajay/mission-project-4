@@ -31,6 +31,12 @@
 				</H3>
 			</div>
 
+			<input type="hidden" name="id" value="<%=bean.getId()%>"> 
+			<input type="hidden" name="createdBy" value="<%=bean.getCreatedBy()%>">
+			<input type="hidden" name="modifiedBy" value="<%=bean.getModifiedBy()%>"> 
+			<input type="hidden" name="createdDatetime"	value="<%=DataUtility.getTimestamp(bean.getCreatedDatetime())%>">
+			<input type="hidden" name="modifiedDatetime" value="<%=DataUtility.getTimestamp(bean.getModifiedDatetime())%>">
+
 			<table>
 
 				<tr>
@@ -102,8 +108,8 @@
 				</tr>
 				<tr>
 					<th></th>
-					<td align="left" colspan="2"><input type="submit" name="operation"
-						value="<%=UserRegistrationCtl.OP_SIGN_UP%>">&nbsp;
+					<td align="left" colspan="2"><input type="submit"
+						name="operation" value="<%=UserRegistrationCtl.OP_SIGN_UP%>">&nbsp;
 						<input type="submit" name="operation"
 						value="<%=UserRegistrationCtl.OP_RESET%>"></td>
 				</tr>
