@@ -157,7 +157,7 @@ public class RoleModel {
 		}
 	}
 
-	public RoleBean findByPk(int id) throws ApplicationException {
+	public RoleBean findByPk(long id) throws ApplicationException {
 
 		RoleBean bean = null;
 		Connection conn = null;
@@ -168,11 +168,11 @@ public class RoleModel {
 
 			conn = JDBCDataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
-			pstmt.setInt(1, id);
+			pstmt.setLong(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				bean = new RoleBean();
-				bean.setId(rs.getInt(1));
+				bean.setId(rs.getLong(1));
 				bean.setName(rs.getString(2));
 				bean.setDescription(rs.getString(3));
 				bean.setCreatedBy(rs.getString(4));

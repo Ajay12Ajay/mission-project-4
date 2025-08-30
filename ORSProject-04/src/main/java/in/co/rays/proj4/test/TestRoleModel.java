@@ -16,7 +16,7 @@ public class TestRoleModel {
 		// testAdd();
 		// testUpdate();
 		// testDelete();
-		// findByPk();
+		findByPk();
 		// findByName();
 		//search();
 		//testList();
@@ -60,7 +60,7 @@ public class TestRoleModel {
 	public static void findByPk() throws ApplicationException {
 
 		RoleModel model = new RoleModel();
-		RoleBean bean = model.findByPk(1);
+		RoleBean bean = model.findByPk(2);
 		if (bean != null) {
 			System.out.println("\t" + bean.getId());
 			System.out.println("\t" + bean.getName());

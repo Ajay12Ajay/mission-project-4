@@ -6,9 +6,14 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import in.co.rays.proj4.bean.BaseBean;
+import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.bean.UserBean;
+import in.co.rays.proj4.exception.ApplicationException;
+import in.co.rays.proj4.model.RoleModel;
+import in.co.rays.proj4.model.UserModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
 import in.co.rays.proj4.util.PropertyReader;
@@ -58,6 +63,17 @@ public class LoginCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		HttpSession session = req.getSession();
+
+		String op = DataUtility.getString(req.getParameter("operation"));
+
+		if (OP_LOG_OUT.equals(op)) {
+			session.invalidate();
+			ServletUtility.setSuccessMessage("Logout Successful!", req);
+			ServletUtility.forward(getView(), req, resp);
+			return;
+		}
+
 		ServletUtility.forward(getView(), req, resp);
 
 	}
@@ -65,9 +81,43 @@ public class LoginCtl extends BaseCtl {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		HttpSession session = req.getSession();
+
 		String op = DataUtility.getString(req.getParameter("operation"));
 
-		if (OP_SIGN_UP.equalsIgnoreCase(op)) {
+		UserModel model = new UserModel();
+		RoleModel role = new RoleModel();
+
+		if (OP_SIGN_IN.equalsIgnoreCase(op)) {
+			UserBean bean = (UserBean) populateBean(req);
+
+			try {
+				bean = model.authenticate(bean.getLogin(), bean.getPassword());
+
+				if (bean != null) {
+					session.setAttribute("user", bean);
+
+					RoleBean rolebean = role.findByPk(bean.getRoleId());
+
+					if (rolebean != null) {
+						session.setAttribute("role", rolebean.getName());
+					}
+
+					ServletUtility.redirect(ORSView.WELCOME_CTL, req, resp);
+					return;
+
+				} else {
+					bean = (UserBean) populateBean(req);
+					ServletUtility.setBean(bean, req);
+					ServletUtility.setErrorMessage("Inavid login Id and Password", req);
+				}
+
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+		} else if (OP_SIGN_UP.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.USER_REGISTRATION_CTL, req, resp);
 			return;
 		}
