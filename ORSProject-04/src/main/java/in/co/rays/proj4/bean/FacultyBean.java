@@ -10,11 +10,11 @@ public class FacultyBean extends BaseBean {
 	private String gender;
 	private String mobileNo;
 	private String email;
-	private Long collegeId;
+	private long collegeId;
 	private String collegeName;
-	private Long courseId;
+	private long courseId;
 	private String courseName;
-	private Long subjectId;
+	private long subjectId;
 	private String subjectName;
 
 	public String getFirstName() {
@@ -65,11 +65,11 @@ public class FacultyBean extends BaseBean {
 		this.email = email;
 	}
 
-	public Long getCollegeId() {
+	public long getCollegeId() {
 		return collegeId;
 	}
 
-	public void setCollegeId(Long collegeId) {
+	public void setCollegeId(long collegeId) {
 		this.collegeId = collegeId;
 	}
 
@@ -81,11 +81,11 @@ public class FacultyBean extends BaseBean {
 		this.collegeName = collegeName;
 	}
 
-	public Long getCourseId() {
+	public long getCourseId() {
 		return courseId;
 	}
 
-	public void setCourseId(Long courseId) {
+	public void setCourseId(long courseId) {
 		this.courseId = courseId;
 	}
 
@@ -97,11 +97,11 @@ public class FacultyBean extends BaseBean {
 		this.courseName = courseName;
 	}
 
-	public Long getSubjectId() {
+	public long getSubjectId() {
 		return subjectId;
 	}
 
-	public void setSubjectId(Long subjectId) {
+	public void setSubjectId(long subjectId) {
 		this.subjectId = subjectId;
 	}
 

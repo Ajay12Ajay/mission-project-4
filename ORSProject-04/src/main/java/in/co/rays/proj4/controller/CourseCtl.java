@@ -8,18 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.proj4.bean.BaseBean;
-import in.co.rays.proj4.bean.RoleBean;
-import in.co.rays.proj4.bean.UserBean;
+import in.co.rays.proj4.bean.CourseBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
-import in.co.rays.proj4.model.RoleModel;
+import in.co.rays.proj4.model.CourseModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
 import in.co.rays.proj4.util.PropertyReader;
 import in.co.rays.proj4.util.ServletUtility;
 
-@WebServlet(name = "RoleCtl", urlPatterns = { "/RoleCtl" })
-public class RoleCtl extends BaseCtl {
+@WebServlet(name = "CourseCtl", urlPatterns = { "/CourseCtl" })
+public class CourseCtl extends BaseCtl {
 
 	@Override
 	protected boolean validate(HttpServletRequest request) {
@@ -27,81 +26,86 @@ public class RoleCtl extends BaseCtl {
 		boolean pass = true;
 
 		if (DataValidator.isNull(request.getParameter("name"))) {
-			request.setAttribute("name", PropertyReader.getValue("error.require", "Name is reqired"));
+			request.setAttribute("name", PropertyReader.getValue("error.require", "Name"));
 			pass = false;
 		} else if (!DataValidator.isName(request.getParameter("name"))) {
 			request.setAttribute("name", "Invalid Name");
 			pass = false;
 		}
 
+		if (DataValidator.isNull(request.getParameter("duration"))) {
+			request.setAttribute("duration", PropertyReader.getValue("error.require", "Duration"));
+			pass = false;
+		}
+
 		if (DataValidator.isNull(request.getParameter("description"))) {
-			request.setAttribute("description", PropertyReader.getValue("error.require", "Description is reqired"));
+			request.setAttribute("description", PropertyReader.getValue("error.require", "Description"));
 			pass = false;
 		}
 
 		return pass;
+
 	}
 
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		CourseBean bean = new CourseBean();
 
-		RoleBean bean = new RoleBean();
-
+		bean.setId(DataUtility.getLong(request.getParameter("id")));
 		bean.setName(DataUtility.getString(request.getParameter("name")));
+		bean.setDuration(DataUtility.getString(request.getParameter("duration")));
 		bean.setDescription(DataUtility.getString(request.getParameter("description")));
 
 		populateDTO(bean, request);
 
 		return bean;
+
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
 		ServletUtility.forward(getView(), req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		RoleBean bean = (RoleBean) populateBean(req);
-		RoleModel model = new RoleModel();
-
 		String op = DataUtility.getString(req.getParameter("operation"));
+		CourseModel model = new CourseModel();
 
 		if (OP_SAVE.equalsIgnoreCase(op)) {
+			CourseBean bean = (CourseBean) populateBean(req);
 
 			try {
 				model.add(bean);
 				ServletUtility.setBean(bean, req);
-				ServletUtility.setSuccessMessage("Role Added Successfully", req);
+				ServletUtility.setSuccessMessage("Course added successfully", req);
 			} catch (DuplicateRecordException e) {
 				ServletUtility.setBean(bean, req);
-				ServletUtility.setErrorMessage("Role already Exists...!", req);
+				ServletUtility.setErrorMessage("Course already exists", req);
+				// TODO Auto-generated catch block
 
 			} catch (ApplicationException e) {
-				// TODO: handle exception
 				e.printStackTrace();
 				ServletUtility.handleException(e, req, resp);
-
+				return;
+				// TODO: handle exception
 			}
-
 			ServletUtility.forward(getView(), req, resp);
-
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
-
-			ServletUtility.redirect(ORSView.ROLE_CTL, req, resp);
+			ServletUtility.redirect(ORSView.COURSE_CTL, req, resp);
 			return;
-
 		}
 
+		// TODO Auto-generated method stub
 		ServletUtility.forward(getView(), req, resp);
 	}
 
 	@Override
 	protected String getView() {
-
-		return ORSView.ROLE_VIEW;
+		// TODO Auto-generated method stub
+		return ORSView.COURSE_VIEW;
 	}
 
 }

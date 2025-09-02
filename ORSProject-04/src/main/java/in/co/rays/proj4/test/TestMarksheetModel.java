@@ -11,7 +11,7 @@ import in.co.rays.proj4.model.MarksheetModel;
 public class TestMarksheetModel {
 
 	public static void main(String[] args) throws Exception {
-		// testAdd();
+		 testAdd();
 		// testUpdate();
 		// testDelete();
 		 //findByPk();
@@ -21,8 +21,8 @@ public class TestMarksheetModel {
 
 	public static void testAdd() throws Exception {
 		MarksheetBean bean = new MarksheetBean();
-		bean.setRollNo("101");
-		bean.setStudentId(2L);
+		bean.setRollNo("103");
+		bean.setStudentId(2);
 		
 		bean.setPhysics(88);
 		bean.setChemistry(88);

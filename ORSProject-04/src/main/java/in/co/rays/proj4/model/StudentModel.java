@@ -307,9 +307,10 @@ public class StudentModel {
 				sql.append(" and email like '" + bean.getEmail() + "%'");
 			}
 
-			if (bean.getCollegeId() != null && bean.getCollegeId() > 0) {
-				sql.append(" and college_id =" + bean.getCollegeId());
-			}
+			/*
+			 * if (bean.getCollegeId() != null && bean.getCollegeId() > 0) {
+			 * sql.append(" and college_id =" + bean.getCollegeId()); }
+			 */
 
 			if (bean.getCollegeName() != null) {
 				sql.append(" and college_name like '" + bean.getCollegeName() + "%'");

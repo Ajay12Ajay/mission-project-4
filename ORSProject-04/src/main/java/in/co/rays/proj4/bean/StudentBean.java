@@ -10,7 +10,7 @@ public class StudentBean extends BaseBean {
 	private String gender;
 	private String mobileNo;
 	private String email;
-	private Long collegeId;
+	private long collegeId;
 	private String collegeName;
 
 	public String getFirstName() {
@@ -61,11 +61,11 @@ public class StudentBean extends BaseBean {
 		this.email = email;
 	}
 
-	public Long getCollegeId() {
+	public long getCollegeId() {
 		return collegeId;
 	}
 
-	public void setCollegeId(Long collegeId) {
+	public void setCollegeId(long collegeId) {
 		this.collegeId = collegeId;
 	}
 
