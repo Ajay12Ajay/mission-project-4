@@ -10,24 +10,31 @@ import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.CollegeBean;
-import in.co.rays.proj4.bean.RoleBean;
+import in.co.rays.proj4.bean.CourseBean;
+import in.co.rays.proj4.bean.SubjectBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.model.CollegeModel;
-import in.co.rays.proj4.model.RoleModel;
+import in.co.rays.proj4.model.CourseModel;
+import in.co.rays.proj4.model.SubjectModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.PropertyReader;
 import in.co.rays.proj4.util.ServletUtility;
 
-@WebServlet(name = "CollegeListCtl", urlPatterns = { "/CollegeListCtl" })
-public class CollegeListCtl extends BaseCtl {
+@WebServlet(name = "SubjectListCtl", urlPatterns = { "/SubjectListCtl" })
+public class SubjectListCtl extends BaseCtl {
 
 	@Override
 	protected void preload(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		CollegeModel model = new CollegeModel();
+		SubjectModel subjectModel = new SubjectModel();
+		CourseModel courseModel = new CourseModel();
+
 		try {
-			List<CollegeBean> collegeList = model.list();
-			request.setAttribute("collegeList", collegeList);
+			List<SubjectBean> subjectList = subjectModel.list();
+			request.setAttribute("subjectList", subjectList);
+
+			List<CourseBean> courseList = courseModel.list();
+			request.setAttribute("courseList", courseList);
 
 		} catch (ApplicationException e) {
 			// TODO: handle exception
@@ -38,27 +45,28 @@ public class CollegeListCtl extends BaseCtl {
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		CollegeBean bean = new CollegeBean();
+		SubjectBean bean = new SubjectBean();
 
-		bean.setId(DataUtility.getLong(request.getParameter("collegeId")));
 		bean.setName(DataUtility.getString(request.getParameter("name")));
-		bean.setCity(DataUtility.getString(request.getParameter("city")));
+		bean.setCourseName(DataUtility.getString(request.getParameter("courseName")));
+		bean.setDescription(DataUtility.getString(request.getParameter("description")));
+		bean.setCourseId(DataUtility.getLong(request.getParameter("courseId")));
+		bean.setId(DataUtility.getLong(request.getParameter("subjectId")));
 
 		return bean;
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		CollegeBean bean = new CollegeBean();
-		CollegeModel model = new CollegeModel();
+		SubjectBean bean = new SubjectBean();
+		SubjectModel model = new SubjectModel();
 
 		try {
-			List<CollegeBean> list = model.search(bean, pageNo, pageSize);
-			List<CollegeBean> next = model.search(bean, pageNo + 1, pageSize);
+			List<SubjectBean> list = model.search(bean, pageNo, pageSize);
+			List<SubjectBean> next = model.search(bean, pageNo + 1, pageSize);
 
 			if (list == null || list.isEmpty()) {
 				ServletUtility.setErrorMessage("no record Found", req);
@@ -90,8 +98,8 @@ public class CollegeListCtl extends BaseCtl {
 		int pageNo = DataUtility.getInt(req.getParameter("pageNo"));
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("pageSize"));
 
-		CollegeBean bean = (CollegeBean) populateBean(req);
-		CollegeModel model = new CollegeModel();
+		SubjectBean bean = (SubjectBean) populateBean(req);
+		SubjectModel model = new SubjectModel();
 
 		String op = DataUtility.getString(req.getParameter("operation"));
 		String[] ids = req.getParameterValues("ids");
@@ -107,12 +115,12 @@ public class CollegeListCtl extends BaseCtl {
 					pageNo--;
 				}
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.COLLEGE_CTL, req, resp);
+				ServletUtility.redirect(ORSView.SUBJECT_CTL, req, resp);
 				return;
 			} else if (OP_DELETE.equalsIgnoreCase(op)) {
 				pageNo = 1;
 				if (ids != null && ids.length > 0) {
-					CollegeBean deletebean = new CollegeBean();
+					SubjectBean deletebean = new SubjectBean();
 					for (String id : ids) {
 						deletebean.setId(DataUtility.getInt(id));
 						model.delete(deletebean.getId());
@@ -124,10 +132,10 @@ public class CollegeListCtl extends BaseCtl {
 				}
 
 			} else if (OP_RESET.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.COLLEGE_LIST_CTL, req, resp);
+				ServletUtility.redirect(ORSView.SUBJECT_LIST_CTL, req, resp);
 				return;
 			} else if (OP_BACK.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.COLLEGE_LIST_CTL, req, resp);
+				ServletUtility.redirect(ORSView.SUBJECT_LIST_CTL, req, resp);
 				return;
 			}
 
@@ -158,7 +166,7 @@ public class CollegeListCtl extends BaseCtl {
 	@Override
 	protected String getView() {
 		// TODO Auto-generated method stub
-		return ORSView.COLLEGE_LIST_VIEW;
+		return ORSView.SUBJECT_LIST_VIEW;
 	}
 
 }

@@ -39,7 +39,7 @@ public class RoleListCtl extends BaseCtl {
 		// TODO Auto-generated method stub
 		RoleBean bean = new RoleBean();
 
-		bean.setId(DataUtility.getLong(request.getParameter("id")));
+		bean.setId(DataUtility.getLong(request.getParameter("roleId")));
 
 		return bean;
 	}
@@ -67,8 +67,6 @@ public class RoleListCtl extends BaseCtl {
 			ServletUtility.setBean(bean, req);
 			req.setAttribute("nextListSize", next.size());
 
-			ServletUtility.forward(getView(), req, resp);
-
 		} catch (ApplicationException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -80,8 +78,76 @@ public class RoleListCtl extends BaseCtl {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		List list = null;
+		List next = null;
+
+		int pageNo = DataUtility.getInt(req.getParameter("pageNo"));
+		int pageSize = DataUtility.getInt(PropertyReader.getValue("pageSize"));
+
+		RoleBean bean = (RoleBean) populateBean(req);
+		RoleModel model = new RoleModel();
+
+		String op = DataUtility.getString(req.getParameter("operation"));
+		String[] ids = req.getParameterValues("ids");
+
+		try {
+			if (OP_SEARCH.equalsIgnoreCase(op) || OP_NEXT.equalsIgnoreCase(op) || OP_PREVIOUS.equalsIgnoreCase(op)) {
+
+				if (OP_SEARCH.equalsIgnoreCase(op)) {
+					pageNo = 1;
+				} else if (OP_NEXT.equalsIgnoreCase(op)) {
+					pageNo++;
+				} else if (OP_PREVIOUS.equalsIgnoreCase(op)) {
+					pageNo--;
+				}
+			} else if (OP_NEW.equalsIgnoreCase(op)) {
+				ServletUtility.redirect(ORSView.ROLE_CTL, req, resp);
+				return;
+			} else if (OP_DELETE.equalsIgnoreCase(op)) {
+				pageNo = 1;
+				if (ids != null && ids.length > 0) {
+					RoleBean deletebean = new RoleBean();
+					for (String id : ids) {
+						deletebean.setId(DataUtility.getInt(id));
+						model.delete(deletebean.getId());
+						ServletUtility.setSuccessMessage("Role deleted successfully", req);
+					}
+				} else {
+					ServletUtility.setErrorMessage("select atleast 1 id..", req);
+
+				}
+
+			} else if (OP_RESET.equalsIgnoreCase(op)) {
+				ServletUtility.redirect(ORSView.ROLE_LIST_CTL, req, resp);
+				return;
+			} else if (OP_BACK.equalsIgnoreCase(op)) {
+				ServletUtility.redirect(ORSView.ROLE_LIST_CTL, req, resp);
+				return;
+			}
+
+			list = model.search(bean, pageNo, pageSize);
+			next = model.search(bean, pageNo + 1, pageSize);
+
+			if (list == null || list.size() == 0) {
+				ServletUtility.setErrorMessage("No record found", req);
+			}
+
+			ServletUtility.setBean(bean, req);
+			ServletUtility.setList(list, req);
+			ServletUtility.setPageNo(pageNo, req);
+			ServletUtility.setPageSize(pageSize, req);
+			req.setAttribute("nextListSize", req);
+			
+		} catch (ApplicationException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			ServletUtility.handleException(e, req, resp);
+			return;
+		}
+
 		// TODO Auto-generated method stub
-		ServletUtility.redirect(ORSView.ROLE_LIST_CTL, req, resp);
+		ServletUtility.forward(getView(), req, resp);
 	}
 
 	@Override

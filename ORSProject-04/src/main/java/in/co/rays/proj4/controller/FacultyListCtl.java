@@ -9,56 +9,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.proj4.bean.BaseBean;
-import in.co.rays.proj4.bean.CollegeBean;
-import in.co.rays.proj4.bean.RoleBean;
+import in.co.rays.proj4.bean.FacultyBean;
+import in.co.rays.proj4.bean.SubjectBean;
 import in.co.rays.proj4.exception.ApplicationException;
-import in.co.rays.proj4.model.CollegeModel;
-import in.co.rays.proj4.model.RoleModel;
+import in.co.rays.proj4.model.FacultyModel;
+import in.co.rays.proj4.model.SubjectModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.PropertyReader;
 import in.co.rays.proj4.util.ServletUtility;
 
-@WebServlet(name = "CollegeListCtl", urlPatterns = { "/CollegeListCtl" })
-public class CollegeListCtl extends BaseCtl {
-
-	@Override
-	protected void preload(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		CollegeModel model = new CollegeModel();
-		try {
-			List<CollegeBean> collegeList = model.list();
-			request.setAttribute("collegeList", collegeList);
-
-		} catch (ApplicationException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
+@WebServlet(name = "FacultyListCtl", urlPatterns = { "/FacultyListCtl" })
+public class FacultyListCtl extends BaseCtl {
 
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		CollegeBean bean = new CollegeBean();
 
-		bean.setId(DataUtility.getLong(request.getParameter("collegeId")));
-		bean.setName(DataUtility.getString(request.getParameter("name")));
-		bean.setCity(DataUtility.getString(request.getParameter("city")));
+		FacultyBean bean = new FacultyBean();
+
+		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
+		bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
+		bean.setEmail(DataUtility.getString(request.getParameter("email")));
 
 		return bean;
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		CollegeBean bean = new CollegeBean();
-		CollegeModel model = new CollegeModel();
+		FacultyBean bean = new FacultyBean();
+		FacultyModel model = new FacultyModel();
 
 		try {
-			List<CollegeBean> list = model.search(bean, pageNo, pageSize);
-			List<CollegeBean> next = model.search(bean, pageNo + 1, pageSize);
+			List<FacultyBean> list = model.search(bean, pageNo, pageSize);
+			List<FacultyBean> next = model.search(bean, pageNo + 1, pageSize);
 
 			if (list == null || list.isEmpty()) {
 				ServletUtility.setErrorMessage("no record Found", req);
@@ -90,8 +76,8 @@ public class CollegeListCtl extends BaseCtl {
 		int pageNo = DataUtility.getInt(req.getParameter("pageNo"));
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("pageSize"));
 
-		CollegeBean bean = (CollegeBean) populateBean(req);
-		CollegeModel model = new CollegeModel();
+		FacultyBean bean = (FacultyBean) populateBean(req);
+		FacultyModel model = new FacultyModel();
 
 		String op = DataUtility.getString(req.getParameter("operation"));
 		String[] ids = req.getParameterValues("ids");
@@ -107,12 +93,12 @@ public class CollegeListCtl extends BaseCtl {
 					pageNo--;
 				}
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.COLLEGE_CTL, req, resp);
+				ServletUtility.redirect(ORSView.FACULTY_CTL, req, resp);
 				return;
 			} else if (OP_DELETE.equalsIgnoreCase(op)) {
 				pageNo = 1;
 				if (ids != null && ids.length > 0) {
-					CollegeBean deletebean = new CollegeBean();
+					FacultyBean deletebean = new FacultyBean();
 					for (String id : ids) {
 						deletebean.setId(DataUtility.getInt(id));
 						model.delete(deletebean.getId());
@@ -124,10 +110,10 @@ public class CollegeListCtl extends BaseCtl {
 				}
 
 			} else if (OP_RESET.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.COLLEGE_LIST_CTL, req, resp);
+				ServletUtility.redirect(ORSView.FACULTY_LIST_CTL, req, resp);
 				return;
 			} else if (OP_BACK.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.COLLEGE_LIST_CTL, req, resp);
+				ServletUtility.redirect(ORSView.FACULTY_LIST_CTL, req, resp);
 				return;
 			}
 
@@ -158,7 +144,7 @@ public class CollegeListCtl extends BaseCtl {
 	@Override
 	protected String getView() {
 		// TODO Auto-generated method stub
-		return ORSView.COLLEGE_LIST_VIEW;
+		return ORSView.FACULTY_LIST_VIEW;
 	}
 
 }

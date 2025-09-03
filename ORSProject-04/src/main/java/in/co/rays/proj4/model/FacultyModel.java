@@ -173,14 +173,14 @@ public class FacultyModel {
 		}
 	}
 
-	public void delete(int id) throws ApplicationException {
+	public void delete(long id) throws ApplicationException {
 		Connection conn = null;
 		try {
 			conn = JDBCDataSource.getConnection();
 			conn.setAutoCommit(false);
 
 			PreparedStatement pstmt = conn.prepareStatement("delete from st_faculty where id=?");
-			pstmt.setInt(1, id);
+			pstmt.setLong(1, id);
 			int i = pstmt.executeUpdate();
 			System.out.println("Data Deleted => " + i);
 
