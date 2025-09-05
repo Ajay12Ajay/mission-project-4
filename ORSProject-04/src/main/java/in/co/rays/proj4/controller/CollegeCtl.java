@@ -81,6 +81,20 @@ public class CollegeCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		long id = DataUtility.getLong(req.getParameter("id"));
+
+		CollegeModel model = new CollegeModel();
+
+		if (id > 0) {
+			try {
+				CollegeBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, req);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+		}
 		ServletUtility.forward(getView(), req, resp);
 	}
 
@@ -89,6 +103,7 @@ public class CollegeCtl extends BaseCtl {
 
 		String op = DataUtility.getString(req.getParameter("operation"));
 		CollegeModel model = new CollegeModel();
+		long id = DataUtility.getLong(req.getParameter("id"));
 
 		if (OP_SAVE.equalsIgnoreCase(op)) {
 			CollegeBean bean = (CollegeBean) populateBean(req);
@@ -109,6 +124,25 @@ public class CollegeCtl extends BaseCtl {
 			}
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.COLLEGE_CTL, req, resp);
+			return;
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			CollegeBean bean = (CollegeBean) populateBean(req);
+			try {
+				if (id > 0) {
+					model.update(bean);
+				}
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setSuccessMessage("Data is successfully updated", req);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setErrorMessage("College Name already exists", req);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.COLLEGE_LIST_CTL, req, resp);
 			return;
 		}
 

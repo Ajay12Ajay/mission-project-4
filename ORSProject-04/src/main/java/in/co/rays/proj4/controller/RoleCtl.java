@@ -47,6 +47,7 @@ public class RoleCtl extends BaseCtl {
 
 		RoleBean bean = new RoleBean();
 
+		bean.setId(DataUtility.getLong(request.getParameter("id")));
 		bean.setName(DataUtility.getString(request.getParameter("name")));
 		bean.setDescription(DataUtility.getString(request.getParameter("description")));
 
@@ -57,6 +58,20 @@ public class RoleCtl extends BaseCtl {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		long id = DataUtility.getLong(req.getParameter("id"));
+		RoleModel model = new RoleModel();
+
+		if (id > 0) {
+			try {
+				RoleBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, req);
+			} catch (ApplicationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+		}
 
 		ServletUtility.forward(getView(), req, resp);
 	}
@@ -64,12 +79,14 @@ public class RoleCtl extends BaseCtl {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		RoleBean bean = (RoleBean) populateBean(req);
 		RoleModel model = new RoleModel();
 
 		String op = DataUtility.getString(req.getParameter("operation"));
 
+		long id = DataUtility.getLong(req.getParameter("id"));
+
 		if (OP_SAVE.equalsIgnoreCase(op)) {
+			RoleBean bean = (RoleBean) populateBean(req);
 
 			try {
 				model.add(bean);
@@ -86,11 +103,33 @@ public class RoleCtl extends BaseCtl {
 
 			}
 
-			ServletUtility.forward(getView(), req, resp);
-
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
 
 			ServletUtility.redirect(ORSView.ROLE_CTL, req, resp);
+			return;
+
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			RoleBean bean = (RoleBean) populateBean(req);
+			try {
+				if (id > 0) {
+					model.update(bean);
+				}
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setSuccessMessage("Role updated Successfully", req);
+
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setErrorMessage("Role already exists", req);
+				// TODO: handle exception
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+				// TODO: handle exception
+			}
+
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.ROLE_LIST_CTL, req, resp);
 			return;
 
 		}

@@ -173,7 +173,7 @@ public class UserModel {
 		}
 	}
 
-	public UserBean findByPk(int id) throws ApplicationException {
+	public UserBean findByPk(long id) throws ApplicationException {
 
 		UserBean bean = null;
 		Connection conn = null;
@@ -184,7 +184,7 @@ public class UserModel {
 
 			conn = JDBCDataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
-			pstmt.setInt(1, id);
+			pstmt.setLong(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				bean = new UserBean();

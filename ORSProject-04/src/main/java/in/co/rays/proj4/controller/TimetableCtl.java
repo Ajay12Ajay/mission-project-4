@@ -111,6 +111,20 @@ public class TimetableCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		long id = DataUtility.getLong(req.getParameter("id"));
+
+		TimetableModel model = new TimetableModel();
+
+		if (id > 0) {
+			try {
+				TimetableBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, req);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+		}
 		ServletUtility.forward(getView(), req, resp);
 	}
 
@@ -119,16 +133,33 @@ public class TimetableCtl extends BaseCtl {
 		// TODO Auto-generated method stub
 
 		String op = DataUtility.getString(req.getParameter("operation"));
+		long id = DataUtility.getLong(req.getParameter("id"));
 		TimetableModel model = new TimetableModel();
 
 		if (OP_SAVE.equalsIgnoreCase(op)) {
 			TimetableBean bean = (TimetableBean) populateBean(req);
 
-			try {
-				model.add(bean);
-				ServletUtility.setBean(bean, req);
-				ServletUtility.setSuccessMessage("Timetable added successfully..", req);
+			TimetableBean bean1;
+			TimetableBean bean2;
+			TimetableBean bean3;
 
+			try {
+				bean1 = model.checkByCourseName(bean.getCourseId(), bean.getExamDate());
+
+				bean2 = model.checkBySubjectName(bean.getCourseId(), bean.getSubjectId(), bean.getExamDate());
+
+				bean3 = model.checkBySemester(bean.getCourseId(), bean.getSubjectId(), bean.getSemester(),
+						bean.getExamDate());
+
+				if (bean1 == null && bean2 == null && bean3 == null) {
+					model.add(bean);
+					ServletUtility.setBean(bean, req);
+					ServletUtility.setSuccessMessage("Timetable added successfully", req);
+				} else {
+					bean = (TimetableBean) populateBean(req);
+					ServletUtility.setBean(bean, req);
+					ServletUtility.setErrorMessage("Timetable already exist!", req);
+				}
 			} catch (DuplicateRecordException e) {
 				ServletUtility.setBean(bean, req);
 				ServletUtility.setErrorMessage("Timetable already exists", req);
@@ -138,11 +169,42 @@ public class TimetableCtl extends BaseCtl {
 				return;
 				// TODO: handle exception
 			}
-			ServletUtility.forward(getView(), req, resp);
+
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.TIMETABLE_CTL, req, resp);
 			return;
 
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			TimetableBean bean = (TimetableBean) populateBean(req);
+
+			TimetableBean bean4;
+
+			try {
+
+				bean4 = model.checkByExamTime(bean.getCourseId(), bean.getSubjectId(), bean.getSemester(),
+						bean.getExamDate(), bean.getExamTime(), bean.getDescription());
+
+				if (id > 0 && bean4 == null) {
+					model.update(bean);
+					ServletUtility.setBean(bean, req);
+					ServletUtility.setSuccessMessage("Timetable updated successfully", req);
+				} else {
+					bean = (TimetableBean) populateBean(req);
+					ServletUtility.setBean(bean, req);
+					ServletUtility.setErrorMessage("Timetable already exist!", req);
+				}
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setErrorMessage("Timetable already exist!", req);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.TIMETABLE_LIST_CTL, req, resp);
+			return;
 		}
 
 		ServletUtility.forward(getView(), req, resp);

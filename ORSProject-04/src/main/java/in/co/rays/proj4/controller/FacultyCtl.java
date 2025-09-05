@@ -146,6 +146,21 @@ public class FacultyCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		long id = DataUtility.getLong(req.getParameter("id"));
+
+		FacultyModel model = new FacultyModel();
+
+		if (id > 0) {
+			try {
+				FacultyBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, req);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+		}
+
 		ServletUtility.forward(getView(), req, resp);
 	}
 
@@ -153,6 +168,7 @@ public class FacultyCtl extends BaseCtl {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String op = DataUtility.getString(req.getParameter("operation"));
+		long id = DataUtility.getLong(req.getParameter("id"));
 		FacultyModel model = new FacultyModel();
 
 		if (OP_SAVE.equalsIgnoreCase(op)) {
@@ -171,11 +187,30 @@ public class FacultyCtl extends BaseCtl {
 				return;
 				// TODO: handle exception
 			}
-			ServletUtility.forward(getView(), req, resp);
+
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.FACULTY_CTL, req, resp);
 			return;
 
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			FacultyBean bean = (FacultyBean) populateBean(req);
+			try {
+				if (id > 0) {
+					model.update(bean);
+				}
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setSuccessMessage("Faculty updated successfully", req);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setErrorMessage("Email already exists", req);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.FACULTY_LIST_CTL, req, resp);
+			return;
 		}
 		// TODO Auto-generated method stub
 		ServletUtility.forward(getView(), req, resp);

@@ -124,12 +124,6 @@ public class UserCtl extends BaseCtl {
 			pass = false;
 		}
 
-		if (!request.getParameter("password").equals(request.getParameter("confirmPassword"))
-				&& !"".equals(request.getParameter("confirmPassword"))) {
-			request.setAttribute("confirmPassword", "Password and Confirm Password must be Same!");
-			pass = false;
-		}
-
 		// TODO Auto-generated method stub
 		return pass;
 	}
@@ -157,6 +151,22 @@ public class UserCtl extends BaseCtl {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		long id = DataUtility.getLong(req.getParameter("id"));
+		UserModel model = new UserModel();
+
+		if (id > 0) {
+			try {
+				UserBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, req);
+
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+				// TODO: handle exception
+			}
+		}
 		// TODO Auto-generated method stub
 		ServletUtility.forward(getView(), req, resp);
 	}
@@ -168,8 +178,12 @@ public class UserCtl extends BaseCtl {
 
 		UserModel model = new UserModel();
 
-		if (OP_SAVE.equalsIgnoreCase(op)) {
+		long id = DataUtility.getLong(req.getParameter("id"));
 
+		
+
+		if (OP_SAVE.equalsIgnoreCase(op)) {
+			
 			UserBean bean = (UserBean) populateBean(req);
 
 			try {
@@ -183,13 +197,37 @@ public class UserCtl extends BaseCtl {
 			} catch (ApplicationException e) {
 				e.printStackTrace();
 				ServletUtility.handleException(e, req, resp);
+				return;
 			}
 
-			ServletUtility.forward(getView(), req, resp);
+			
 
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.USER_CTL, req, resp);
 			return;
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			UserBean bean = (UserBean) populateBean(req);
+			try {	
+				if(id>0) {
+					model.update(bean);
+				}
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setSuccessMessage("User Updated successfully", req);
+			} catch (DuplicateRecordException e) {
+				// TODO Auto-generated catch block
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setErrorMessage("User already exists", req);
+
+			} catch (ApplicationException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+			}
+
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.USER_LIST_CTL, req, resp);
+			return;
+
 		}
 		// TODO Auto-generated method stub
 		ServletUtility.forward(getView(), req, resp);

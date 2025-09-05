@@ -102,12 +102,20 @@ public class MarksheetCtl extends BaseCtl {
 
 		MarksheetBean bean = new MarksheetBean();
 
-		bean.setStudentId(DataUtility.getLong(request.getParameter("studentId")));
+		bean.setId(DataUtility.getLong(request.getParameter("id")));
 		bean.setRollNo(DataUtility.getString(request.getParameter("rollNo")));
-	//	bean.setName(DataUtility.getString(request.getParameter("name")));
-		bean.setPhysics(DataUtility.getInt(request.getParameter("physics")));
-		bean.setChemistry(DataUtility.getInt(request.getParameter("chemistry")));
-		bean.setMaths(DataUtility.getInt(request.getParameter("maths")));
+		bean.setName(DataUtility.getString(request.getParameter("name")));
+		bean.setStudentId(DataUtility.getLong(request.getParameter("studentId")));
+
+		if (request.getParameter("physics") != null && request.getParameter("physics").length() != 0) {
+			bean.setPhysics(DataUtility.getInt(request.getParameter("physics")));
+		}
+		if (request.getParameter("chemistry") != null && request.getParameter("chemistry").length() != 0) {
+			bean.setChemistry(DataUtility.getInt(request.getParameter("chemistry")));
+		}
+		if (request.getParameter("maths") != null && request.getParameter("maths").length() != 0) {
+			bean.setMaths(DataUtility.getInt(request.getParameter("maths")));
+		}
 
 		populateDTO(bean, request);
 
@@ -117,7 +125,20 @@ public class MarksheetCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		long id = DataUtility.getLong(req.getParameter("id"));
 
+		MarksheetModel model = new MarksheetModel();
+
+		if (id > 0) {
+			try {
+				MarksheetBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, req);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+		}
 		ServletUtility.forward(getView(), req, resp);
 	}
 
@@ -125,12 +146,11 @@ public class MarksheetCtl extends BaseCtl {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String op = DataUtility.getString(req.getParameter("operation"));
+		long id = DataUtility.getLong(req.getParameter("id"));
 		MarksheetModel model = new MarksheetModel();
-		MarksheetBean bean = (MarksheetBean) populateBean(req);
-		System.out.println(bean);
 
 		if (OP_SAVE.equalsIgnoreCase(op)) {
-			
+			MarksheetBean bean = (MarksheetBean) populateBean(req);
 
 			try {
 				System.out.println(bean);
@@ -147,9 +167,28 @@ public class MarksheetCtl extends BaseCtl {
 				ServletUtility.handleException(e, req, resp);
 				return;
 			}
-			ServletUtility.forward(getView(), req, resp);
+
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.MARKSHEET_CTL, req, resp);
+			return;
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			MarksheetBean bean = (MarksheetBean) populateBean(req);
+			try {
+				if (id > 0) {
+					model.update(bean);
+				}
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setSuccessMessage("Marksheet updated successfully", req);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setErrorMessage("Roll No already exists", req);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.MARKSHEET_LIST_CTL, req, resp);
 			return;
 		}
 

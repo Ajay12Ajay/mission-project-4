@@ -117,6 +117,21 @@ public class StudentCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		long id = DataUtility.getLong(req.getParameter("id"));
+
+		StudentModel model = new StudentModel();
+
+		if (id > 0) {
+			try {
+				StudentBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, req);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+		}
 		ServletUtility.forward(getView(), req, resp);
 	}
 
@@ -124,10 +139,11 @@ public class StudentCtl extends BaseCtl {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String op = DataUtility.getString(req.getParameter("operation"));
+		long id = DataUtility.getLong(req.getParameter("id"));
 		StudentModel model = new StudentModel();
-		
-		if(OP_SAVE.equalsIgnoreCase(op)) {
-			StudentBean bean =(StudentBean) populateBean(req);
+
+		if (OP_SAVE.equalsIgnoreCase(op)) {
+			StudentBean bean = (StudentBean) populateBean(req);
 			try {
 				model.add(bean);
 				ServletUtility.setBean(bean, req);
@@ -136,12 +152,31 @@ public class StudentCtl extends BaseCtl {
 				ServletUtility.setBean(bean, req);
 				ServletUtility.setErrorMessage("Student Name already exists", req);
 				// TODO: handle exception
-			}catch (ApplicationException e) {
+			} catch (ApplicationException e) {
 				e.printStackTrace();
 				ServletUtility.handleException(e, req, resp);
 				return;
 				// TODO: handle exception
 			}
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			StudentBean bean = (StudentBean) populateBean(req);
+			try {
+				if (id > 0) {
+					model.update(bean);
+				}
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setSuccessMessage("Student updated successfully", req);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, req);
+				ServletUtility.setErrorMessage("Email already exists", req);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, req, resp);
+				return;
+			}
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.STUDENT_LIST_CTL, req, resp);
+			return;
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.STUDENT_CTL, req, resp);
 			return;
