@@ -53,7 +53,7 @@ public class CollegeListCtl extends BaseCtl {
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		CollegeBean bean = new CollegeBean();
+		CollegeBean bean = (CollegeBean) populateBean(req);
 		CollegeModel model = new CollegeModel();
 
 		try {

@@ -26,7 +26,7 @@ public class MarksheetListCtl extends BaseCtl {
 		// TODO Auto-generated method stub
 		MarksheetBean bean = new MarksheetBean();
 
-		//bean.setId(DataUtility.getLong(request.getParameter("id")));
+		// bean.setId(DataUtility.getLong(request.getParameter("id")));
 
 		bean.setName(DataUtility.getString(request.getParameter("name")));
 
@@ -41,7 +41,7 @@ public class MarksheetListCtl extends BaseCtl {
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		MarksheetBean bean = new MarksheetBean();
+		MarksheetBean bean = (MarksheetBean) populateBean(req);
 		MarksheetModel model = new MarksheetModel();
 
 		try {

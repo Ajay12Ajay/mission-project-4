@@ -54,7 +54,7 @@ public class CourseListCtl extends BaseCtl {
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		CourseBean bean = new CourseBean();
+		CourseBean bean = (CourseBean) populateBean(req);
 		CourseModel model = new CourseModel();
 
 		try {

@@ -39,7 +39,7 @@ public class FacultyListCtl extends BaseCtl {
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		FacultyBean bean = new FacultyBean();
+		FacultyBean bean = (FacultyBean) populateBean(req);
 		FacultyModel model = new FacultyModel();
 
 		try {

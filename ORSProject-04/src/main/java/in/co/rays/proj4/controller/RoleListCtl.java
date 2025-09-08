@@ -50,7 +50,7 @@ public class RoleListCtl extends BaseCtl {
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		RoleBean bean = new RoleBean();
+		RoleBean bean = (RoleBean) populateBean(req);
 		RoleModel model = new RoleModel();
 
 		try {
@@ -138,7 +138,7 @@ public class RoleListCtl extends BaseCtl {
 			ServletUtility.setPageNo(pageNo, req);
 			ServletUtility.setPageSize(pageSize, req);
 			req.setAttribute("nextListSize", req);
-			
+
 		} catch (ApplicationException e) {
 			// TODO: handle exception
 			e.printStackTrace();

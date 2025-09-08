@@ -58,7 +58,7 @@ public class TimetableListCtl extends BaseCtl {
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		TimetableBean bean = new TimetableBean();
+		TimetableBean bean = (TimetableBean) populateBean(req);
 		TimetableModel model = new TimetableModel();
 
 		try {

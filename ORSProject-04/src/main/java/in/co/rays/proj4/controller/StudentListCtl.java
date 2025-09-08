@@ -41,7 +41,7 @@ public class StudentListCtl extends BaseCtl {
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		StudentBean bean = new StudentBean();
+		StudentBean bean = (StudentBean) populateBean(req);
 		StudentModel model = new StudentModel();
 
 		try {
