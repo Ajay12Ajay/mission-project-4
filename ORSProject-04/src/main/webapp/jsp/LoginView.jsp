@@ -34,9 +34,9 @@
 			<table>
 				<tr>
 					<th align="left">Login Id<span style="color: red">*</span></th>
-					<td align="center"><input type="text" name="login"
-						placeholder="Enter Email Id"
-						value="<%=DataUtility.getStringData(bean.getLogin())%>"></td>
+					<td align="center">
+					<input type="text" name="login"	placeholder="Enter Email Id" value="<%=DataUtility.getStringData(bean.getLogin())%>">
+					</td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("login", request)%></font></td>
 				</tr>
 				<tr>
@@ -52,10 +52,10 @@
 				</tr>
 				<tr>
 					<th></th>
-					<td colspan="2"><input type="submit" name="operation"
-						value="<%=LoginCtl.OP_SIGN_IN%>"> &nbsp; <input
-						type="submit" name="operation" value="<%=LoginCtl.OP_SIGN_UP%>">
-						&nbsp;</td>
+					<td colspan="2">
+					<input type="submit" name="operation" value="<%=LoginCtl.OP_SIGN_IN%>"> &nbsp; 
+					<input type="submit" name="operation" value="<%=LoginCtl.OP_SIGN_UP%>">	&nbsp;
+					</td>
 				</tr>
 				<tr>
 					<th></th>

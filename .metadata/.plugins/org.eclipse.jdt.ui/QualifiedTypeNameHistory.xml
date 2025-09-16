@@ -37,7 +37,6 @@
     <fullyQualifiedTypeName name="in.co.rays.proj4.controller.BaseCtl"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="in.co.rays.proj4.util.PropertyReader"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.bean.CollegeBean"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.model.CollegeModel"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.bean.SubjectBean"/>
@@ -57,4 +56,5 @@
     <fullyQualifiedTypeName name="in.co.rays.proj4.controller.ORSView"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.exception.DuplicateRecordException"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.util.PropertyReader"/>
 </qualifiedTypeNameHistroy>

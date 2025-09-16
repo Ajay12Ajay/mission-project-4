@@ -81,9 +81,10 @@ public class LoginCtl extends BaseCtl {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		String op = DataUtility.getString(req.getParameter("operation"));
+
 		HttpSession session = req.getSession();
 
-		String op = DataUtility.getString(req.getParameter("operation"));
 
 		UserModel model = new UserModel();
 		RoleModel role = new RoleModel();

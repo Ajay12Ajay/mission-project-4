@@ -27,8 +27,7 @@
 	%>
 	<h3>
 		Hi,
-		<%=user.getFirstName()%>
-		(<%=session.getAttribute("role")%>)
+		<%=user.getFirstName()%>(<%=session.getAttribute("role")%>)
 	</h3>
 	<a href="MyProfileCtl"><b>My Profile</b></a>
 	<b>|</b>

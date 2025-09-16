@@ -330,7 +330,7 @@ public class UserModel {
 				sql.append(" and last_name like '" + bean.getLastName() + "%'");
 			}
 
-			if (bean.getLogin() != null) {
+			if (bean.getLogin() != null && bean.getLogin().length() > 0) {
 				sql.append(" and login like '" + bean.getLogin() + "%'");
 			}
 

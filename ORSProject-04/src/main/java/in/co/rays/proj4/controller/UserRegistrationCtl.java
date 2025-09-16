@@ -68,6 +68,11 @@ public class UserRegistrationCtl extends BaseCtl {
 			pass = false;
 		}
 
+		if (!request.getParameter("password").equals(request.getParameter("confirmPassword")) && !"".equals(request.getParameter("confirmPassword"))) {
+			request.setAttribute("confirmPassword", "Password and Confirm Password must be Same!");
+			pass = false;
+		}
+		
 		if (DataValidator.isNull(request.getParameter("gender"))) {
 			request.setAttribute("gender", PropertyReader.getValue("error.require", "Gender"));
 			pass = false;
@@ -81,11 +86,6 @@ public class UserRegistrationCtl extends BaseCtl {
 			pass = false;
 		}
 
-		if (!request.getParameter("password").equals(request.getParameter("confirmPassword"))
-				&& !"".equals(request.getParameter("confirmPassword"))) {
-			request.setAttribute("confirmPassword", "Password and Confirm Password must be Same!");
-			pass = false;
-		}
 
 		if (DataValidator.isNull(request.getParameter("mobileNo"))) {
 			request.setAttribute("mobileNo", PropertyReader.getValue("error.require", "Mobile No"));

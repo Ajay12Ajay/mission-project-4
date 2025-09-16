@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="ids"/>
+		<item key="selection" value="BACK"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="BACK"/>
+			<item value="ServletUtility.getParameter"/>
+			<item value="ServletUtility.setParameter"/>
+			<item value="selectall"/>
+			<item value="welcome page"/>
+			<item value="welcome"/>
 			<item value="ids"/>
 			<item value="Timetable"/>
 			<item value="Subject"/>
@@ -17,12 +23,6 @@
 			<item value="College"/>
 			<item value="next"/>
 			<item value="studentL"/>
-			<item value="roleList"/>
-			<item value="OP_SAVE"/>
-			<item value="roleModel"/>
-			<item value="SIGN_UP"/>
-			<item value="getDate"/>
-			<item value="Exception"/>
 		</list>
 		<list key="replacehistory">
 			<item value="Faculty"/>

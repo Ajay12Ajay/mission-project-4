@@ -85,15 +85,14 @@ public class UserListCtl extends BaseCtl {
 
 		List list = null;
 		List next = null;
-
-		int pageNo = DataUtility.getInt(req.getParameter("pageNo"));
+		
+		String op    = DataUtility.getString(req.getParameter("operation"));
+		int pageNo   = DataUtility.getInt(req.getParameter("pageNo"));
 		int pageSize = DataUtility.getInt(req.getParameter("pageSize"));
+		String[] ids = req.getParameterValues("ids");
 
 		UserBean bean = (UserBean) populateBean(req);
 		UserModel model = new UserModel();
-
-		String op = DataUtility.getString(req.getParameter("operation"));
-		String[] ids = req.getParameterValues("ids");
 
 		try {
 			if (OP_SEARCH.equalsIgnoreCase(op) || OP_NEXT.equalsIgnoreCase(op) || OP_PREVIOUS.equalsIgnoreCase(op)) {
