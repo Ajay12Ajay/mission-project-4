@@ -90,6 +90,9 @@ public class UserListCtl extends BaseCtl {
 		int pageNo   = DataUtility.getInt(req.getParameter("pageNo"));
 		int pageSize = DataUtility.getInt(req.getParameter("pageSize"));
 		String[] ids = req.getParameterValues("ids");
+		
+		pageNo = (pageNo == 0) ? 1 : pageNo;
+		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
 		UserBean bean = (UserBean) populateBean(req);
 		UserModel model = new UserModel();

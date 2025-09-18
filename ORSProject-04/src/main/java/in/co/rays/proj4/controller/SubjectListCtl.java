@@ -97,6 +97,9 @@ public class SubjectListCtl extends BaseCtl {
 
 		int pageNo = DataUtility.getInt(req.getParameter("pageNo"));
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("pageSize"));
+		
+		pageNo = (pageNo == 0) ? 1 : pageNo;
+		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
 		SubjectBean bean = (SubjectBean) populateBean(req);
 		SubjectModel model = new SubjectModel();

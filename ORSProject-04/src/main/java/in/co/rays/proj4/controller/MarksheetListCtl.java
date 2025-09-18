@@ -77,6 +77,9 @@ public class MarksheetListCtl extends BaseCtl {
 
 		int pageNo = DataUtility.getInt(req.getParameter("pageNo"));
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("pageSize"));
+		
+		pageNo = (pageNo == 0) ? 1 : pageNo;
+		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
 		MarksheetBean bean = (MarksheetBean) populateBean(req);
 		MarksheetModel model = new MarksheetModel();
