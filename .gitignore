@@ -1,1 +1,43 @@
 /.metadata/
+
+# ------------------------
+# Java + Maven + Eclipse Project .gitignore
+# ------------------------
+
+# Eclipse specific files
+.metadata/
+.settings/
+bin/
+*.classpath
+*.project
+
+# IntelliJ / IDEA specific
+.idea/
+*.iml
+out/
+
+# Maven target directory
+target/
+
+# Logs & temp files
+*.log
+*.tmp
+*.swp
+*.bak
+*.class
+
+# Docker / MySQL data (never commit DB files)
+ORSProject-04/mysql-data/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node / frontend (if added later)
+node_modules/
+dist/
+
+# ------------------------
+# End of file
+# ------------------------
