@@ -91,7 +91,7 @@
 				</tr>
 				<tr>
 					<th align="left">Exam Date<span style="color: red">*</span></th>
-					<td><input type="date" id="udatee" name="examDate"
+					<td><input type="text" id="udatee" name="examDate"
 						placeholder="Select Exam Date"
 						value="<%=DataUtility.getDateString(bean.getExamDate())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("examDate", request)%></font></td>
@@ -143,5 +143,6 @@
 			</table>
 		</div>
 	</form>
+	<%@ include file="Footer.jsp"%>
 </body>
 </html>

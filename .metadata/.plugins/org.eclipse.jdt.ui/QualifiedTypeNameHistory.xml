@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.bean.BaseBean"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.JDBCDateSource"/>
     <fullyQualifiedTypeName name="com.mysql.cj.xdevapi.PreparableStatement"/>
@@ -21,7 +20,6 @@
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.bean.DropdownListBean"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletException"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.DataValidator"/>
     <fullyQualifiedTypeName name="jdk.nashorn.internal.ir.SetSplitState"/>
@@ -52,9 +50,14 @@
     <fullyQualifiedTypeName name="in.co.rays.proj4.bean.RoleBean"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.DataUtility"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.exception.ApplicationException"/>
-    <fullyQualifiedTypeName name="in.co.rays.proj4.util.ServletUtility"/>
-    <fullyQualifiedTypeName name="in.co.rays.proj4.controller.ORSView"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.exception.DuplicateRecordException"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.PropertyReader"/>
+    <fullyQualifiedTypeName name="javax.servlet.Filter"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.controller.ORSView"/>
+    <fullyQualifiedTypeName name="javax.servlet.annotation.WebFilter"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.util.ServletUtility"/>
 </qualifiedTypeNameHistroy>
