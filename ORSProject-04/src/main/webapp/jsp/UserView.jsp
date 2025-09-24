@@ -93,7 +93,7 @@
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("confirmPassword", request)%></font></td>
 				</tr>
 				<tr>
-					<th align="left">Date of Birth<span style="width: 98%"
+					<th align="left">Date of Birth<span 
 						style="color: red">*</span></th>
 					<td><input type="text" id="udate" name="dob"
 						placeholder="Select Date of Birth"

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DatabaseException;
@@ -18,6 +20,8 @@ import in.co.rays.proj4.util.EmailUtility;
 import in.co.rays.proj4.util.JDBCDataSource;
 
 public class UserModel {
+	
+	Logger log = Logger.getLogger(UserModel.class);
 
 	public static Integer nextPk() throws DatabaseException {
 		Connection conn = null;
@@ -45,7 +49,15 @@ public class UserModel {
 
 	}
 
+	/**
+	 * @param bean
+	 * @return
+	 * @throws ApplicationException
+	 * @throws DuplicateRecordException
+	 */
 	public long add(UserBean bean) throws ApplicationException, DuplicateRecordException {
+		
+		log.debug("debug in UserModel add()");
 
 		Connection conn = null;
 		int pk = 0;

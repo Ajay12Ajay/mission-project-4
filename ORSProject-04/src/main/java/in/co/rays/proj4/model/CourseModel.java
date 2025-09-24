@@ -54,7 +54,7 @@ public class CourseModel {
 		try {
 			pk = nextPk();
 			conn = JDBCDataSource.getConnection();
-			pk = nextPk();
+			
 			conn.setAutoCommit(false);
 
 			PreparedStatement pstmt = conn.prepareStatement("insert into st_course values (?,?,?,?,?,?,?,?)");

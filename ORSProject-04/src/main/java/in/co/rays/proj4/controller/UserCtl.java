@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.bean.UserBean;
@@ -22,9 +24,12 @@ import in.co.rays.proj4.util.ServletUtility;
 
 @WebServlet(name = "UserCtl", urlPatterns = { "/ctl/UserCtl" })
 public class UserCtl extends BaseCtl {
+	
+	Logger log = Logger.getLogger(UserCtl.class);
 
 	@Override
 	protected void preload(HttpServletRequest request) {
+		log.debug("Debug in UserCtl preload()");
 
 		RoleModel roleModel = new RoleModel();
 
@@ -40,6 +45,7 @@ public class UserCtl extends BaseCtl {
 
 	@Override
 	protected boolean validate(HttpServletRequest request) {
+		log.debug("debug in validate() in UserCtl");
 
 		boolean pass = true;
 
