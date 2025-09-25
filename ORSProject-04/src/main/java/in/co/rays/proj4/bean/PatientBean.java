@@ -41,11 +41,7 @@ public class PatientBean extends BaseBean{
 		this.decease = decease;
 	}
 
-	@Override
-	public String getKey() {
-		// TODO Auto-generated method stub
-		return id + "";
-	}
+	
 
 	@Override
 	public String getValue() {
@@ -57,6 +53,12 @@ public class PatientBean extends BaseBean{
 	public String toString() {
 		return "PatientBean [name=" + name + ", dateOfVisit=" + dateOfVisit + ", mobile=" + mobile + ", decease="
 				+ decease + "]";
+	}
+
+	@Override
+	public String getKey() {
+		// TODO Auto-generated method stub
+		return decease;
 	}
 	
 	

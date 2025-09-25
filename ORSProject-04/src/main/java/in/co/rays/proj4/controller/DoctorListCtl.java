@@ -2,10 +2,8 @@ package in.co.rays.proj4.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,30 +11,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.proj4.bean.BaseBean;
-import in.co.rays.proj4.bean.PatientBean;
+import in.co.rays.proj4.bean.DoctorBean;
 import in.co.rays.proj4.exception.ApplicationException;
-import in.co.rays.proj4.model.PatientModel;
+import in.co.rays.proj4.model.DoctorModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.PropertyReader;
 import in.co.rays.proj4.util.ServletUtility;
 
-@WebServlet(name = "PatientListCtl", urlPatterns = { "/ctl/PatientListCtl" })
-public class PatientListCtl extends BaseCtl {
-
+@WebServlet(name = "DoctorListCtl", urlPatterns = { "/ctl/DoctorListCtl" })
+public class DoctorListCtl extends BaseCtl {
 	@Override
 	protected void preload(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		PatientModel model = new PatientModel();
+		DoctorModel model = new DoctorModel();
 		try {
 			Iterator it =  model.list().iterator();
-			HashMap<String,String> deceaseMap= new HashMap<String,String>();
+			HashMap<String,String> expertiseMap= new HashMap<String,String>();
 			while(it.hasNext()) {
-				PatientBean bean= (PatientBean)it.next();
-				deceaseMap.put(bean.getDecease(), bean.getDecease());
+				DoctorBean bean= (DoctorBean)it.next();
+				expertiseMap.put(bean.getExpertise(), bean.getExpertise());
 				
 			}
 			
-			request.setAttribute("deceaseMap", deceaseMap);
+			request.setAttribute("expertiseMap", expertiseMap);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
@@ -45,13 +42,13 @@ public class PatientListCtl extends BaseCtl {
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		PatientBean bean = new PatientBean();
+		DoctorBean bean = new DoctorBean();
 
 		bean.setId(DataUtility.getLong(request.getParameter("id")));
 		bean.setName(DataUtility.getString(request.getParameter("name")));
-		bean.setDateOfVisit(DataUtility.getDate(request.getParameter("dateOfVisit")));
+		bean.setDob(DataUtility.getDate(request.getParameter("dob")));
 		bean.setMobile(DataUtility.getString(request.getParameter("mobile")));
-		bean.setDecease(DataUtility.getString(request.getParameter("decease")));
+		bean.setExpertise(DataUtility.getString(request.getParameter("expertise")));
 
 		return bean;
 	}
@@ -61,12 +58,12 @@ public class PatientListCtl extends BaseCtl {
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		PatientBean bean = (PatientBean) populateBean(req);
-		PatientModel model = new PatientModel();
+		DoctorBean bean = (DoctorBean) populateBean(req);
+		DoctorModel model = new DoctorModel();
 
 		try {
-			List<PatientBean> list = model.search(bean, pageNo, pageSize);
-			List<PatientBean> next = model.search(bean, pageNo + 1, pageSize);
+			List<DoctorBean> list = model.search(bean, pageNo, pageSize);
+			List<DoctorBean> next = model.search(bean, pageNo + 1, pageSize);
 
 			if (list == null || list.isEmpty()) {
 				ServletUtility.setErrorMessage("no record Found", req);
@@ -101,8 +98,8 @@ public class PatientListCtl extends BaseCtl {
 		pageNo = (pageNo == 0) ? 1 : pageNo;
 		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
-		PatientBean bean = (PatientBean) populateBean(req);
-		PatientModel model = new PatientModel();
+		DoctorBean bean = (DoctorBean) populateBean(req);
+		DoctorModel model = new DoctorModel();
 
 		String op = DataUtility.getString(req.getParameter("operation"));
 		String[] ids = req.getParameterValues("ids");
@@ -118,16 +115,16 @@ public class PatientListCtl extends BaseCtl {
 					pageNo--;
 				}
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.PATIENT_CTL, req, resp);
+				ServletUtility.redirect(ORSView.DOCTOR_CTL, req, resp);
 				return;
 			} else if (OP_DELETE.equalsIgnoreCase(op)) {
 				pageNo = 1;
 				if (ids != null && ids.length > 0) {
-					PatientBean deletebean = new PatientBean();
+					DoctorBean deletebean = new DoctorBean();
 					for (String id : ids) {
 						deletebean.setId(DataUtility.getInt(id));
 						model.delete(deletebean.getId());
-						ServletUtility.setSuccessMessage("Role deleted successfully", req);
+						ServletUtility.setSuccessMessage("Doctor deleted successfully", req);
 					}
 				} else {
 					ServletUtility.setErrorMessage("select atleast 1 id..", req);
@@ -135,10 +132,10 @@ public class PatientListCtl extends BaseCtl {
 				}
 
 			} else if (OP_RESET.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.PATIENT_LIST_CTL, req, resp);
+				ServletUtility.redirect(ORSView.DOCTOR_LIST_CTL, req, resp);
 				return;
 			} else if (OP_BACK.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.PATIENT_LIST_CTL, req, resp);
+				ServletUtility.redirect(ORSView.DOCTOR_LIST_CTL, req, resp);
 				return;
 			}
 
@@ -169,7 +166,8 @@ public class PatientListCtl extends BaseCtl {
 	@Override
 	protected String getView() {
 		// TODO Auto-generated method stub
-		return ORSView.PATIENT_LIST_VIEW;
+		return ORSView.DOCTOR_LIST_VIEW;
 	}
+
 
 }

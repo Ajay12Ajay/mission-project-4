@@ -91,7 +91,9 @@
 	  <a href="<%=ORSView.ROLE_CTL%>">Add Role</a> | 
 	  <a href="<%=ORSView.ROLE_LIST_CTL%>">Role List</a> |
 	  <a href="<%=ORSView.PATIENT_CTL%>">Add Patient</a>|
-	  <a href="<%=ORSView.PATIENT_LIST_CTL%>">Patient List</a>
+	  <a href="<%=ORSView.PATIENT_LIST_CTL%>">Patient List</a>|
+	  <a href="<%=ORSView.DOCTOR_CTL%>">Add Doctor</a>|
+	  <a href="<%=ORSView.DOCTOR_LIST_CTL%>">Doctor List</a>|
 	  <%
  	}
 

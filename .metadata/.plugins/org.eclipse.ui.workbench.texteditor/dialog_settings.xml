@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value=""/>
+		<item key="selection" value="Doctor"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="CourseL"/>
-			<item value="My Profil"/>
+			<item value="Patient"/>
+			<item value="PatientModel"/>
+			<item value="PatientBean"/>
+			<item value="st_patient"/>
+			<item value="Edit"/>
+			<item value="roleList"/>
+			<item value="Java"/>
+			<item value="JavaD"/>
 			<item value="session"/>
-			<item value="BACK"/>
-			<item value="ServletUtility.getParameter"/>
-			<item value="ServletUtility.setParameter"/>
-			<item value="selectall"/>
-			<item value="welcome page"/>
-			<item value="welcome"/>
-			<item value="ids"/>
-			<item value="Timetable"/>
-			<item value="Subject"/>
-			<item value="Course"/>
-			<item value="Marksheet"/>
-			<item value="Student"/>
+			<item value="Logout"/>
+			<item value="CourseModel"/>
+			<item value="CourseBean"/>
+			<item value="courseId"/>
+			<item value="USER"/>
+			<item value="st_course"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Doctor"/>
+			<item value="DoctorModel"/>
+			<item value="DoctorBean"/>
+			<item value="st_doctor"/>
+			<item value="PatientModel"/>
+			<item value="PatientBean"/>
+			<item value="st_patient"/>
 			<item value="Faculty"/>
 			<item value="Timetable"/>
 			<item value="Subject"/>
@@ -33,13 +40,6 @@
 			<item value="Student"/>
 			<item value="ApplicationException"/>
 			<item value="AppliactionException"/>
-			<item value="FacultyModel"/>
-			<item value="FacultyBean"/>
-			<item value="st_faculty"/>
-			<item value="TimetableModel"/>
-			<item value="TimetableBean"/>
-			<item value="st_timetable"/>
-			<item value="SubjectModel"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="in.co.rays.proj4.bean.BaseBean"/>
-    <fullyQualifiedTypeName name="in.co.rays.proj4.util.JDBCDateSource"/>
-    <fullyQualifiedTypeName name="com.mysql.cj.xdevapi.PreparableStatement"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="java.lang.StringBuffer"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="jdk.nashorn.internal.scripts.JD"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.JDBCDataSource"/>
-    <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.exception.RecordNotFoundException"/>
@@ -32,7 +24,6 @@
     <fullyQualifiedTypeName name="in.co.rays.proj4.model.CourseModel"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.bean.CourseBean"/>
-    <fullyQualifiedTypeName name="in.co.rays.proj4.controller.BaseCtl"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.bean.CollegeBean"/>
@@ -48,9 +39,7 @@
     <fullyQualifiedTypeName name="in.co.rays.proj4.bean.UserBean"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.model.RoleModel"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.bean.RoleBean"/>
-    <fullyQualifiedTypeName name="in.co.rays.proj4.util.DataUtility"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.exception.ApplicationException"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.exception.DuplicateRecordException"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.PropertyReader"/>
     <fullyQualifiedTypeName name="javax.servlet.Filter"/>
@@ -60,4 +49,15 @@
     <fullyQualifiedTypeName name="in.co.rays.proj4.controller.ORSView"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.WebFilter"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.ServletUtility"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.model.PatientModel"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.util.DataUtility"/>
+    <fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+    <fullyQualifiedTypeName name="java.util.Iterator"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.bean.PatientBean"/>
+    <fullyQualifiedTypeName name="java.util.HashSet"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.bean.BaseBean"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.controller.BaseCtl"/>
 </qualifiedTypeNameHistroy>
