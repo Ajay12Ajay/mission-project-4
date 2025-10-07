@@ -1,7 +1,30 @@
+/**
+ * @author Ajay
+ * 
+ * @version 1.0
+ * @since 2025
+ *
+ * <p>
+ * The {@code BaseCtl} class is an abstract servlet controller that provides 
+ * a base structure for all controller classes in the application. 
+ * It defines common constants, methods for validation, data preloading, 
+ * bean population, and request servicing.
+ * </p>
+ *
+ * <p>
+ * Use Case:
+ * <ul>
+ *   <li>Provides a common structure for all servlet controllers.</li>
+ *   <li>Reduces code duplication by handling common operations.</li>
+ *   <li>Enforces implementation of specific methods like {@link #getView()} 
+ *       in subclasses.</li>
+ * </ul>
+ * </p>
+ */
+
 package in.co.rays.proj4.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,181 +38,153 @@ import in.co.rays.proj4.util.ServletUtility;
 
 public abstract class BaseCtl extends HttpServlet {
 
-	/*
-	 * Variables
-	 * 
-	 * UseCase :
-	 * 
-	 * 1. We have created constants for all the commonly used buttons
-	 * 
-	 * Advantage :
-	 * 
-	 * 1. this ways removes the chances of Spelling mistakes. 2. Make changes on one
-	 * place effect everywhere.
-	 */
+    /** Common operation constants used across controllers. */
+    public static final String OP_SAVE = "Save";
+    public static final String OP_UPDATE = "Update";
+    public static final String OP_CANCEL = "Cancel";
+    public static final String OP_DELETE = "Delete";
+    public static final String OP_LIST = "List";
+    public static final String OP_SEARCH = "Search";
+    public static final String OP_VIEW = "View";
+    public static final String OP_NEXT = "Next";
+    public static final String OP_PREVIOUS = "Previous";
+    public static final String OP_NEW = "New";
+    public static final String OP_GO = "Go";
+    public static final String OP_BACK = "Back";
+    public static final String OP_RESET = "Reset";
+    public static final String OP_LOG_OUT = "Logout";
 
-	public static final String OP_SAVE = "Save";
-	public static final String OP_UPDATE = "Update";
-	public static final String OP_CANCEL = "Cancel";
-	public static final String OP_DELETE = "Delete";
-	public static final String OP_LIST = "List";
-	public static final String OP_SEARCH = "Search";
-	public static final String OP_VIEW = "View";
-	public static final String OP_NEXT = "Next";
-	public static final String OP_PREVIOUS = "Previous";
-	public static final String OP_NEW = "New";
-	public static final String OP_GO = "Go";
-	public static final String OP_BACK = "Back";
-	public static final String OP_RESET = "Reset";
-	public static final String OP_LOG_OUT = "Logout";
+    /** Message keys for success and error messages. */
+    public static final String MSG_SUCCESS = "success";
+    public static final String MSG_ERROR = "error";
 
-	public static final String MSG_SUCCESS = "success";
+    /**
+     * Validates input data entered by the user.
+     * <p>
+     * Child classes override this method to implement specific validation logic.
+     * </p>
+     *
+     * @param request the {@link HttpServletRequest} object containing client input
+     * @return {@code true} if validation passes or no validation is required, 
+     *         otherwise {@code false}
+     */
+    protected boolean validate(HttpServletRequest request) {
+        return true;
+    }
 
-	public static final String MSG_ERROR = "error";
+    /**
+     * Loads pre-required data before displaying the form.
+     * <p>
+     * Child classes can override this method to load data (like dropdown lists)
+     * dynamically from the database or statically from JSP.
+     * </p>
+     *
+     * @param request the {@link HttpServletRequest} object to set attributes
+     */
+    protected void preload(HttpServletRequest request) {
+    }
 
-	/*
-	 * validate Methods
-	 * 
-	 * UseCase :
-	 * 
-	 * 1. its use to validate input data entered by users. 2. Child class override
-	 * only when form is submitted. 3. HttpServletRequest request is used as
-	 * parameter because we get data from request also set data in the request. 4.
-	 * Return true When nothing to validate Or Data is validated else false.
-	 * 
-	 * Advantage :
-	 * 
-	 * 1. Also take care of the format of data entered by users. 2. Reduce
-	 * hard-coding of code
-	 * 
-	 */
+    /**
+     * Populates the {@link BaseBean} with request parameters.
+     * <p>
+     * Child classes must override this method to populate specific bean fields.
+     * </p>
+     *
+     * @param request the {@link HttpServletRequest} object containing user input
+     * @return populated {@link BaseBean} or {@code null} if no data found
+     */
+    protected BaseBean populateBean(HttpServletRequest request) {
+        return null;
+    }
 
-	protected boolean validate(HttpServletRequest request) {
-		return true;
-	}
+    /**
+     * Populates base DTO fields such as createdBy, modifiedBy, 
+     * createdDatetime, and modifiedDatetime.
+     *
+     * @param dto     the {@link BaseBean} object to populate
+     * @param request the {@link HttpServletRequest} containing user and audit info
+     * @return the populated {@link BaseBean}
+     */
+    protected BaseBean populateDTO(BaseBean dto, HttpServletRequest request) {
 
-	/*
-	 * preload method
-	 * 
-	 * UseCase :
-	 * 
-	 * 1. Loads the Pre-loaded data at the time of html form loading. 2.
-	 * HttpServletRequest request is used as parameter because we set data in the
-	 * request and needs nothing in return so used void as return type.
-	 * 
-	 * Advantage :
-	 * 
-	 * 1. its loads the data before page is loaded. 2. it give us ablity to get the
-	 * data dynamically(From the Database) as well as statically( inside the jsp
-	 * page ) 3. it use HTMLUtility String getList(String name, String selectedVal,
-	 * List list) method to set the data dynamically 4. it use HTMLUtility String
-	 * getList(String name, String selectedVal, HashMap<String, String> map) method
-	 * to set the data statically( inside the jsp page )
-	 * 
-	 */
+        String createdBy = request.getParameter("createdBy");
+        String modifiedBy = null;
 
-	protected void preload(HttpServletRequest request) {
-	}
+        UserBean userbean = (UserBean) request.getSession().getAttribute("user");
 
-	/*
-	 * populateBean
-	 * 
-	 * UseCase :
-	 * 
-	 * 1. Get the data from request and set in BaseBean and return the BaseBean
-	 * object 2. When no data is available return null
-	 * 
-	 * Advantage :
-	 * 
-	 * 1.
-	 */
+        if (userbean == null) {
+            createdBy = "root";
+            modifiedBy = "root";
+        } else {
+            modifiedBy = userbean.getLogin();
+            if ("null".equalsIgnoreCase(createdBy) || DataValidator.isNull(createdBy)) {
+                createdBy = modifiedBy;
+            }
+        }
 
-	protected BaseBean populateBean(HttpServletRequest request) {
-		return null;
-	}
+        dto.setCreatedBy(createdBy);
+        dto.setModifiedBy(modifiedBy);
 
-	protected BaseBean populateDTO(BaseBean dto, HttpServletRequest request) {
+        long cdt = DataUtility.getLong(request.getParameter("createdDatetime"));
 
-		String createdBy = request.getParameter("createdBy");
-		String modifiedBy = null;
+        if (cdt > 0) {
+            dto.setCreatedDatetime(DataUtility.getTimestamp(cdt));
+        } else {
+            dto.setCreatedDatetime(DataUtility.getCurrentTimestamp());
+        }
 
-		UserBean userbean = (UserBean) request.getSession().getAttribute("user");
+        dto.setModifiedDatetime(DataUtility.getCurrentTimestamp());
 
-		if (userbean == null) {
-			createdBy = "root";
-			modifiedBy = "root";
-		} else {
-			modifiedBy = userbean.getLogin();
-			if ("null".equalsIgnoreCase(createdBy) || DataValidator.isNull(createdBy)) {
-				createdBy = modifiedBy;
-			}
-		}
+        return dto;
+    }
 
-		dto.setCreatedBy(createdBy);
-		dto.setModifiedBy(modifiedBy);
+    /**
+     * Overrides the default {@link HttpServlet#service(HttpServletRequest, HttpServletResponse)} 
+     * method to include custom request handling.
+     * 
+     * This method:
+     * <ul>
+     *   <li>Calls {@link #preload(HttpServletRequest)} to load necessary data.</li>
+     *   <li>Performs validation before forwarding the request.</li>
+     *   <li>Delegates processing to child controllers via {@code super.service()}.</li>
+     * </ul>
+     * 
+     *
+     * @param request  the {@link HttpServletRequest} object
+     * @param response the {@link HttpServletResponse} object
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		long cdt = DataUtility.getLong(request.getParameter("createdDatetime"));
+        preload(request);
 
-		if (cdt > 0) {
-			dto.setCreatedDatetime(DataUtility.getTimestamp(cdt));
-		} else {
-			dto.setCreatedDatetime(DataUtility.getCurrentTimestamp());
-		}
+        String op = DataUtility.getString(request.getParameter("operation"));
 
-		dto.setModifiedDatetime(DataUtility.getCurrentTimestamp());
+        if (DataValidator.isNotNull(op) && !OP_CANCEL.equalsIgnoreCase(op)
+                && !OP_VIEW.equalsIgnoreCase(op) && !OP_DELETE.equalsIgnoreCase(op)
+                && !OP_RESET.equalsIgnoreCase(op)) {
 
-		return dto;
-	}
+            if (!validate(request)) {
+                BaseBean bean = (BaseBean) populateBean(request);
+                ServletUtility.setBean(bean, request);
+                ServletUtility.forward(getView(), request, response);
+                return;
+            }
+        }
+        super.service(request, response);
+    }
 
-	/*
-	 * service method
-	 * 
-	 * UseCase :
-	 * 
-	 * 1. to perform some task everytime 2.
-	 * 
-	 * 
-	 * Advantage :
-	 * 
-	 * 1. Runs everytime when any Servlet called
-	 * 
-	 */
-
-	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		preload(request);
-
-		String op = DataUtility.getString(request.getParameter("operation"));
-		
-		if (DataValidator.isNotNull(op) && !OP_CANCEL.equalsIgnoreCase(op) && !OP_VIEW.equalsIgnoreCase(op)
-				&& !OP_DELETE.equalsIgnoreCase(op) && !OP_RESET.equalsIgnoreCase(op)) {
-
-			if (!validate(request)) {
-				BaseBean bean = (BaseBean) populateBean(request);
-				ServletUtility.setBean(bean, request);
-				ServletUtility.forward(getView(), request, response);
-				return;
-			}
-		}
-		super.service(request, response);
-	}
-
-	/*
-	 * getView
-	 * 
-	 * UseCase :
-	 * 
-	 * 1. All Child class must override this method
-	 * 
-	 * 
-	 * Advantage :
-	 * 
-	 * 1. return name of CurrentView
-	 * 
-	 */
-
-	protected abstract String getView();
+    /**
+     * Returns the name of the view (JSP page) associated with this controller.
+     * <p>
+     * Each child controller must implement this method to specify which view to display.
+     * </p>
+     *
+     * @return the view page name as a {@link String}
+     */
+    protected abstract String getView();
 
 }

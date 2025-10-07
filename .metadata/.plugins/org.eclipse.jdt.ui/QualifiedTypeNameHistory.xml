@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="jdk.nashorn.internal.scripts.JD"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.JDBCDataSource"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="in.co.rays.proj4.controller.BaseCtl"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.ServletUtility"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.DataUtility"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>
