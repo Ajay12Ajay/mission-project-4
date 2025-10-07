@@ -350,7 +350,7 @@ public class UserModel {
 				sql.append(" and password like '" + bean.getPassword() + "%'");
 			}
 
-			if (bean.getDob() != null) {
+			if (bean.getDob() != null && bean.getDob().getTime() > 0) {
 				sql.append(" and dob like '" + new java.sql.Date(bean.getDob().getTime()) + "%'");
 			}
 

@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="in.co.rays.proj4.bean.RoleBean"%>
 <%@page import="in.co.rays.proj4.controller.ORSView"%>
 <%@page import="in.co.rays.proj4.util.HTMLUtility"%>
@@ -54,7 +55,28 @@
 
                         <label><b>Login Id:</b></label>
                         <input type="text" name="login" placeholder="Enter Email ID" value="<%=ServletUtility.getParameter("login", request)%>">&emsp;
+						
+						<%-- <th align="left">Gender<span style="color: red">*</span></th>
+					<td>
+						<%
+							HashMap<String, String> map = new HashMap<String, String>();
+							map.put("Male", "Male");
+							map.put("Female", "Female");
 
+							String htmlList = HTMLUtility.getList("gender", ServletUtility.getParameter("gender", request), map);
+						%> <%=htmlList%>
+					</td>
+					
+						 --%>
+						 
+						 <%-- 
+						 <th align="left">Date of Birth</th>
+					<td><input type="text" id="udate" name="dob"
+						placeholder="Select Date of Birth"
+						value="<%=ServletUtility.getParameter("dob", request)%>">&emsp;</td> --%>
+					
+						 
+						 
                         <label><b>Role : </b></label>
                         <%=HTMLUtility.getList("roleId", String.valueOf(bean.getRoleId()), roleList)%>&emsp;
 

@@ -21,7 +21,9 @@
 
 		<jsp:useBean id="bean" class="in.co.rays.proj4.bean.DoctorBean"
 			scope="request"></jsp:useBean>
-
+		
+		<% HashMap <String,String> experticeMap =(HashMap <String,String>)request.getAttribute("experticeMap"); %>
+		
 
 
 		<div align="center">
@@ -82,20 +84,8 @@
 					<th align="left">Expertise<span style="color: red">*</span></th>
 					<td>
 						<%
-							HashMap<String, String> map = new HashMap<String, String>();
-						map.put("Cardiology", "Cardiology");
-						map.put("Neurology", "Neurology");
-						map.put("Pulmonology", "Pulmonology");
-						map.put("Gastroenterology", "Gastroenterology");
-						map.put("Endocrinology", "Endocrinology");
-						map.put("Dermatology", "Dermatology");
-						map.put("Pediatrics", "Pediatrics");
-						map.put("Oncology", "Oncology");
-						map.put("Psychiatry", "Psychiatry");
-						map.put("Orthopedics", "Orthopedics");
-
-
-							String htmlList = HTMLUtility.getList("expertise", bean.getExpertise(), map);
+						
+							String htmlList = HTMLUtility.getList("expertise", bean.getExpertise(), experticeMap);
 						%> <%=htmlList%>
 					</td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("expertise", request)%></font></td>

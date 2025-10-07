@@ -49,7 +49,6 @@
     <fullyQualifiedTypeName name="in.co.rays.proj4.controller.ORSView"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.WebFilter"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.model.PatientModel"/>
-    <fullyQualifiedTypeName name="in.co.rays.proj4.util.DataUtility"/>
     <fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
     <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
     <fullyQualifiedTypeName name="java.util.Iterator"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.controller.BaseCtl"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.ServletUtility"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.util.DataUtility"/>
 </qualifiedTypeNameHistroy>

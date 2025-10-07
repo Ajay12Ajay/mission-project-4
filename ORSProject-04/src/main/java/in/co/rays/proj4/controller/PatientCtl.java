@@ -1,6 +1,7 @@
 package in.co.rays.proj4.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.PatientBean;
-
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.model.PatientModel;
@@ -21,6 +21,26 @@ import in.co.rays.proj4.util.ServletUtility;
 @WebServlet(name = "PatientCtl", urlPatterns = { "/ctl/PatientCtl" })
 
 public class PatientCtl extends BaseCtl {
+	
+	@Override
+	protected void preload(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+		HashMap<String, String> deceaseMap = new HashMap<String, String>();
+		deceaseMap.put("Diabetes", "Diabetes");
+		deceaseMap.put("Hypertension", "Hypertension");
+		deceaseMap.put("Asthma", "Asthma");
+		deceaseMap.put("Tuberculosis", "Tuberculosis");
+		deceaseMap.put("Malaria", "Malaria");
+		deceaseMap.put("Alzheimer's", "Alzheimer's");
+		deceaseMap.put("Parkinson's", "Parkinson's");
+		deceaseMap.put("Hepatitis", "Hepatitis");
+		deceaseMap.put("Cholera", "Cholera");
+		deceaseMap.put("Ebola", "Ebola");
+		
+		request.setAttribute("deceaseMap", deceaseMap);
+	}
+	
 	@Override
 	protected boolean validate(HttpServletRequest request) {
 

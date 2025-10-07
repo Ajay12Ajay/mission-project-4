@@ -20,10 +20,10 @@
 
 		<jsp:useBean id="bean" class="in.co.rays.proj4.bean.PatientBean"
 			scope="request"></jsp:useBean>
+			
+			<% HashMap <String,String> deceaseMap =(HashMap <String,String>)request.getAttribute("deceaseMap"); %>
 
-<%-- 		<%
-			List<PatientBean> roleList = (List<PatientBean>) request.getAttribute("roleList");
-		%> --%>
+
 
 		<div align="center">
 			<h1 align="center" style="margin-bottom: -15; color: navy">
@@ -82,21 +82,10 @@
 				<tr>
 					<th align="left">Decease<span style="color: red">*</span></th>
 					<td>
-						<%
-							HashMap<String, String> map = new HashMap<String, String>();
-						map.put("Diabetes", "Diabetes");
-						map.put("Hypertension", "Hypertension");
-						map.put("Asthma", "Asthma");
-						map.put("Tuberculosis", "Tuberculosis");
-						map.put("Malaria", "Malaria");
-						map.put("Alzheimer's", "Alzheimer's");
-						map.put("Parkinson's", "Parkinson's");
-						map.put("Hepatitis", "Hepatitis");
-						map.put("Cholera", "Cholera");
-						map.put("Ebola", "Ebola");
-
-							String htmlList = HTMLUtility.getList("decease", bean.getDecease(), map);
-						%> <%=htmlList%>
+						<%					
+							String htmlList = HTMLUtility.getList("decease", bean.getDecease(), deceaseMap);
+						%> 
+						<%=htmlList%>
 					</td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("decease", request)%></font></td>
 				</tr>

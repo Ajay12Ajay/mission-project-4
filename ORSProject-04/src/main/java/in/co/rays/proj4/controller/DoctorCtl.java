@@ -1,6 +1,7 @@
 package in.co.rays.proj4.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +20,27 @@ import in.co.rays.proj4.util.ServletUtility;
 
 @WebServlet(name = "DoctorCtl", urlPatterns = { "/ctl/DoctorCtl" })
 public class DoctorCtl extends BaseCtl {
+	
+	@Override
+	protected void preload(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		HashMap<String, String> experticeMap = new HashMap<String, String>();
+		experticeMap.put("Cardiology", "Cardiology");
+		experticeMap.put("Neurology", "Neurology");
+		experticeMap.put("Pulmonology", "Pulmonology");
+		experticeMap.put("Gastroenterology", "Gastroenterology");
+		experticeMap.put("Endocrinology", "Endocrinology");
+		experticeMap.put("Dermatology", "Dermatology");
+		experticeMap.put("Pediatrics", "Pediatrics");
+		experticeMap.put("Oncology", "Oncology");
+		experticeMap.put("Psychiatry", "Psychiatry");
+		experticeMap.put("Orthopedics", "Orthopedics");
+	
+	  request.setAttribute("experticeMap", experticeMap);
+
+		
+		
+	}
 
 	@Override
 	protected boolean validate(HttpServletRequest request) {
