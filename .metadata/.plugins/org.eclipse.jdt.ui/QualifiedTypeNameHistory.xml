@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="jdk.nashorn.internal.scripts.JD"/>
-    <fullyQualifiedTypeName name="in.co.rays.proj4.util.JDBCDataSource"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.exception.RecordNotFoundException"/>
@@ -48,7 +46,6 @@
     <fullyQualifiedTypeName name="in.co.rays.proj4.controller.ORSView"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.WebFilter"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.model.PatientModel"/>
-    <fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
     <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
     <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.bean.PatientBean"/>
@@ -56,8 +53,11 @@
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.bean.BaseBean"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="in.co.rays.proj4.controller.BaseCtl"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.ServletUtility"/>
     <fullyQualifiedTypeName name="in.co.rays.proj4.util.DataUtility"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.controller.PatientListCtl"/>
+    <fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.controller.DoctorListCtl"/>
+    <fullyQualifiedTypeName name="in.co.rays.proj4.controller.BaseCtl"/>
 </qualifiedTypeNameHistroy>

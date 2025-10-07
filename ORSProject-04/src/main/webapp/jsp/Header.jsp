@@ -114,7 +114,7 @@
  	}
 
  		if (user.getRoleId() == RoleBean.ADMIN) {
- %> | <a href="doc/index.html" target="blank">Java Doc</a> <%
+ %> | <a href="<%=ORSView.JAVA_DOC%>" target="blank">Java Doc</a> <%
  	}
  	} else {
  %> <a href="<%=ORSView.LOGIN_CTL%>"></a> <%
