@@ -152,6 +152,14 @@ public interface ORSView {
     public String DOCTOR_LIST_VIEW = PAGE_FOLDER + "/DoctorListView.jsp";
     public String DOCTOR_LIST_CTL = APP_CONTEXT + "/ctl/DoctorListCtl";
     
+    
+ // ================== COURCE MODULE ==================
+    public String COURCE_VIEW = PAGE_FOLDER + "/CourceView.jsp";
+    public String COURCE_CTL = APP_CONTEXT + "/ctl/CourceCtl";
+
+    public String COURCE_LIST_VIEW = PAGE_FOLDER + "/CourceListView.jsp";
+    public String COURCE_LIST_CTL = APP_CONTEXT + "/ctl/CourceListCtl";
+    
     public String JAVA_DOC = APP_CONTEXT + "/doc/index.html";
     
     
