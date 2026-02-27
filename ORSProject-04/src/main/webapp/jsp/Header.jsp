@@ -98,6 +98,10 @@
 	  <a href="<%=ORSView.COURCE_CTL%>">Add Cource</a> |
 	  <a href="<%=ORSView.COURCE_LIST_CTL%>">Cource List</a> |
 	  
+	  
+	  <a href="<%=ORSView.LIBRARY_BOOK_ISSUE_CTL%>">Add Book Issue</a> |
+	  <a href="<%=ORSView.LIBRARY_BOOK_ISSUE_LIST_CTL%>">Book Issue List</a> |
+	  
 	  <%
  	}
 
