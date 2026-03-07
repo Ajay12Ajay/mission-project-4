@@ -101,6 +101,18 @@ public class DataUtility {
 			return 0;
 		}
 	}
+	
+	/**
+	 * Converts String to Double
+	 */
+	public static double getDouble(String val) {
+
+		if (DataValidator.isDouble(val)) {
+			return Double.parseDouble(val);
+		} else {
+			return 0.0;
+		}
+	}
 
 	public static void main(String[] args) {
 		// Test getString

@@ -167,6 +167,20 @@ public interface ORSView {
 	public String LIBRARY_BOOK_ISSUE_LIST_VIEW = PAGE_FOLDER + "/LibraryBookIssueListView.jsp";
 	public String LIBRARY_BOOK_ISSUE_LIST_CTL = APP_CONTEXT + "/ctl/LibraryBookIssueListCtl";
 
+	public String FEEDBACK_VIEW = PAGE_FOLDER + "/FeedbackView.jsp";
+	public String FEEDBACK_CTL = APP_CONTEXT + "/ctl/FeedbackCtl";
+
+	public String FEEDBACK_LIST_VIEW = PAGE_FOLDER + "/FeedbackListView.jsp";
+	public String FEEDBACK_LIST_CTL = APP_CONTEXT + "/ctl/FeedbackListCtl";
+
+	// ================== TRANSPORT MODULE ==================
+
+	public String TRANSPORT_VIEW = PAGE_FOLDER + "/TransportView.jsp";
+	public String TRANSPORT_CTL = APP_CONTEXT + "/ctl/TransportCtl";
+
+	public String TRANSPORT_LIST_VIEW = PAGE_FOLDER + "/TransportListView.jsp";
+	public String TRANSPORT_LIST_CTL = APP_CONTEXT + "/ctl/TransportListCtl";
+
 	public String JAVA_DOC = APP_CONTEXT + "/doc/index.html";
 
 }

@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DataValidator {
-	
+
 	public static boolean isNull(String val) {
 		if (val == null || val.trim().length() == 0) {
 			return true;
@@ -160,6 +160,49 @@ public class DataValidator {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * Validates whether the value is a valid Double number
+	 */
+	public static boolean isDouble(String val) {
+
+		if (isNotNull(val)) {
+			try {
+				Double.parseDouble(val);
+				return true;
+			} catch (NumberFormatException e) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Validates generic module code. Format: UPPERCASELETTERS-DIGITS
+	 * 
+	 * Rules: - Alphabets must be uppercase (A-Z) - Alphabets can be any length
+	 * (minimum 1) - Then hyphen (-) - Then digits (minimum 1 digit)
+	 * 
+	 * Examples: FC-1 FC-001 FEEDBACK-100 ABCD-99999
+	 */
+	public static boolean isModuleCode(String val) {
+
+		if (isNotNull(val)) {
+
+			// Regex Explanation:
+			// ^ → Start
+			// [A-Z]+ → One or more uppercase letters
+			// - → Hyphen
+			// [0-9]+ → One or more digits
+			// $ → End
+
+			String codeReg = "^[A-Z]+-[0-9]+$";
+
+			return val.matches(codeReg);
+		}
+		return false;
 	}
 
 	public static void main(String[] args) {

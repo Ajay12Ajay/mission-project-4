@@ -102,6 +102,12 @@
 	  <a href="<%=ORSView.LIBRARY_BOOK_ISSUE_CTL%>">Add Book Issue</a> |
 	  <a href="<%=ORSView.LIBRARY_BOOK_ISSUE_LIST_CTL%>">Book Issue List</a> |
 	  
+	  <a href="<%=ORSView.FEEDBACK_CTL%>">Add Feedback</a>|
+	  <a href="<%=ORSView.FEEDBACK_LIST_CTL%>">Feedback List</a>|
+	  
+	  <a href="<%=ORSView.TRANSPORT_CTL%>">Add Transport</a>|
+	  <a href="<%=ORSView.TRANSPORT_LIST_CTL%>">Transport List</a>|
+	  
 	  <%
  	}
 
