@@ -181,6 +181,14 @@ public interface ORSView {
 	public String TRANSPORT_LIST_VIEW = PAGE_FOLDER + "/TransportListView.jsp";
 	public String TRANSPORT_LIST_CTL = APP_CONTEXT + "/ctl/TransportListCtl";
 
+	// ================== VEHICLE MODULE ==================
+
+	public String VEHICLE_VIEW = PAGE_FOLDER + "/VehicleView.jsp";
+	public String VEHICLE_CTL = APP_CONTEXT + "/ctl/VehicleCtl";
+
+	public String VEHICLE_LIST_VIEW = PAGE_FOLDER + "/VehicleListView.jsp";
+	public String VEHICLE_LIST_CTL = APP_CONTEXT + "/ctl/VehicleListCtl";
+
 	public String JAVA_DOC = APP_CONTEXT + "/doc/index.html";
 
 }

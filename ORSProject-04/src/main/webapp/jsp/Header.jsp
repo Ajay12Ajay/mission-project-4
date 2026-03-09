@@ -108,6 +108,9 @@
 	  <a href="<%=ORSView.TRANSPORT_CTL%>">Add Transport</a>|
 	  <a href="<%=ORSView.TRANSPORT_LIST_CTL%>">Transport List</a>|
 	  
+	  <a href="<%=ORSView.VEHICLE_CTL%>">Add Vehicle</a>|
+	  <a href="<%=ORSView.VEHICLE_LIST_CTL%>">Vehicle List</a>|
+	  
 	  <%
  	}
 
