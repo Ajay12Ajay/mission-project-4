@@ -105,12 +105,13 @@
 	  <a href="<%=ORSView.FEEDBACK_CTL%>">Add Feedback</a>|
 	  <a href="<%=ORSView.FEEDBACK_LIST_CTL%>">Feedback List</a>|
 	  
-	  <a href="<%=ORSView.TRANSPORT_CTL%>">Add Transport</a>|
-	  <a href="<%=ORSView.TRANSPORT_LIST_CTL%>">Transport List</a>|
 	  
 	  <a href="<%=ORSView.VEHICLE_CTL%>">Add Vehicle</a>|
 	  <a href="<%=ORSView.VEHICLE_LIST_CTL%>">Vehicle List</a>|
+
 	  
+	  <a href="<%=ORSView.TRANSPORT_CTL%>">Add Transport</a>|
+	  <a href="<%=ORSView.TRANSPORT_LIST_CTL%>">Transport List</a>|
 	  <%
  	}
 
