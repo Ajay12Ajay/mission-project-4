@@ -189,6 +189,14 @@ public interface ORSView {
 	public String VEHICLE_LIST_VIEW = PAGE_FOLDER + "/VehicleListView.jsp";
 	public String VEHICLE_LIST_CTL = APP_CONTEXT + "/ctl/VehicleListCtl";
 
+	// ================== FREELANCER MODULE ==================
+
+	public String FREELANCER_VIEW = PAGE_FOLDER + "/FreelancerView.jsp";
+	public String FREELANCER_CTL = APP_CONTEXT + "/ctl/FreelancerCtl";
+
+	public String FREELANCER_LIST_VIEW = PAGE_FOLDER + "/FreelancerListView.jsp";
+	public String FREELANCER_LIST_CTL = APP_CONTEXT + "/ctl/FreelancerListCtl";
+
 	public String JAVA_DOC = APP_CONTEXT + "/doc/index.html";
 
 }

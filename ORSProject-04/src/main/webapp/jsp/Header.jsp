@@ -112,6 +112,10 @@
 	  
 	  <a href="<%=ORSView.TRANSPORT_CTL%>">Add Transport</a>|
 	  <a href="<%=ORSView.TRANSPORT_LIST_CTL%>">Transport List</a>|
+	  
+	  <a href="<%=ORSView.FREELANCER_CTL%>">Add Freelancer</a>|
+	  <a href="<%=ORSView.FREELANCER_LIST_CTL%>">Freelancer List</a>|
+	  
 	  <%
  	}
 
